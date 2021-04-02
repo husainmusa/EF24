@@ -1,0 +1,9 @@
+page-vehicle-search-modal .autoRow {
+  background-color: #F9F9F9;
+  width: 46px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 2px !important;
+  margin-bottom: 5px !important;
+}

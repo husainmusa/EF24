@@ -1,0 +1,216 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Change Profile Data</ion-title>
+  </ion-navbar>
+</ion-header> -->
+<!-- // code done by diviya -->
+<ion-header>
+  <shared-header [title]="'lbl_change_profile_data'"></shared-header>
+</ion-header>
+
+<!-- // code done by diviya -->
+
+<ion-content>
+  <form [formGroup]="ProfileForm">
+   
+      <ion-card class="profile-card">
+        <ion-avatar>
+          <img [src]="profileImage" class="profile-image" />
+
+          <button ion-fab mini class="fabButton">
+            <ion-icon (click)="presentActionSheet()" name="md-create" item-right></ion-icon>
+          </button>
+          
+        </ion-avatar>
+        
+      </ion-card>
+
+
+   <div [hidden] ="!viewOne" >
+
+      <ion-row radio-group [ngModel]="company.commercial_register" formControlName="company_CC"   >
+        <ion-col col-6  >
+          <ion-label class="comercialText" >{{'lbl_Commercial_Register' | translate}}</ion-label>
+        </ion-col>
+
+      
+        <ion-col col-6 >
+          <ion-row>
+            <ion-col col-6 >
+              <ion-item no-lines class="customRadio" >
+                <ion-label>{{'lbl_yes' | translate}}</ion-label>
+                <ion-radio value="1"      ></ion-radio>
+              </ion-item>
+
+            </ion-col>
+            <ion-col col-6 >
+
+              <ion-item no-lines class="customRadio" >
+                <ion-label>{{'lbl_no' | translate}}</ion-label>
+                <ion-radio value="0"      ></ion-radio>
+              </ion-item>
+
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-list>
+      <ion-item style="border-top:none;">
+        <h5>{{ 'lbl_company_data' | translate }}</h5>
+        <ion-label floating>{{ 'lbl_company' | translate }}</ion-label>
+        <ion-input type="text" [ngModel]="company.name" formControlName="company_name"></ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label floating>{{ 'lbl_addition' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="company.addition" formControlName="company_addition"></ion-input>
+      </ion-item> -->
+      <ion-item>
+        <ion-label floating>{{ 'lbl_street_no' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="company.street" formControlName="company_street"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{ 'lbl_po_box' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="company.pob" formControlName="company_pob"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{ 'lbl_post_code' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="company.postcode" formControlName="company_postcode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{ 'lbl_town' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="company.town" formControlName="company_town"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label >{{ 'lbl_country' | translate }}   </ion-label>
+        <ion-select [(ngModel)]="company.country" formControlName="company_country">
+          <ion-option *ngFor="let country of countyList"  value="{{country.id}}" > {{country.Country}} </ion-option>
+          <!-- <ion-option *ngFor="let country of countyList"  value="Austria">Austria</ion-option> -->
+          <!-- <ion-option value="Belgium">Belgium</ion-option>
+          <ion-option value="Bulgaria">Bulgaria</ion-option>
+          <ion-option value="Croatia">Croatia</ion-option>
+          <ion-option value="Czech Republic">Czech Republic</ion-option>
+          <ion-option value="Denmark">Denmark</ion-option>
+          <ion-option value="Estonia">Estonia</ion-option>
+          <ion-option value="Finland">Finland</ion-option> -->
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+  </div> 
+
+    <div [hidden]="!viewTwo" >
+
+    
+    <ion-list>
+      <ion-item style="border-bottom:none;">
+          <h5>{{ 'lbl_personal_details' | translate }}</h5>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>{{ 'lbl_username' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="user.username" formControlName="user_username" readonly="readonly">
+        </ion-input>
+      </ion-item>
+    
+
+    <ion-item>
+      <ion-label >{{ 'lbl_form_of_address' | translate }}</ion-label>
+      <ion-select [(ngModel)]="user.prefix_name" formControlName="user_prefix_name">
+        <ion-option value="Mrs">{{ 'lbl_mrs' | translate }}</ion-option>
+        <ion-option value="Mr" selected="selected">{{ 'lbl_mr' | translate }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>{{ 'lbl_first_name' | translate }}</ion-label>
+      <ion-input type="text" [(ngModel)]="user.fname" formControlName="user_fname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>{{ 'lbl_surname' | translate }}</ion-label>
+      <ion-input type="text" [(ngModel)]="user.lname" formControlName="user_lname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>{{ 'lbl_email' | translate }}</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email" formControlName="user_email" readonly="readonly"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>{{ 'lbl_telephone' | translate }}</ion-label>
+      <ion-input type="tel" [(ngModel)]="user.phone_code" formControlName="user_phone_code"></ion-input>
+      <ion-input type="text" [(ngModel)]="user.phone" formControlName="user_phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="user.mobile_code" formControlName="user_mobile_code"></ion-input>
+      <ion-label floating>{{ 'lbl_mobile' | translate }}</ion-label>
+      <ion-input type="text" [(ngModel)]="user.mobile" formControlName="user_mobile"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label >{{ 'lbl_preferred_language' | translate }}</ion-label>
+      <ion-select [(ngModel)]="user.language" formControlName="user_language">
+        <ion-option value="German">German</ion-option>
+        <ion-option value="French">French</ion-option>
+        <ion-option value="Italian">Italian</ion-option>
+        <ion-option value="English" selected="selected">English</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label >{{ 'lbl_findout_about_us' | translate }}</ion-label>
+      <ion-select [(ngModel)]="user.site_reference" formControlName="user_site_reference">
+        <ion-option value="FLEET">{{ 'lbl_about_fleet' | translate }}</ion-option>
+        <ion-option value="AD">{{ 'lbl_advertisement' | translate }}</ion-option>
+        <ion-option value="EVENT">{{ 'lbl_event' | translate }}</ion-option>
+        <ion-option value="GARAGE">{{ 'lbl_le_garage' | translate }}</ion-option>
+        <ion-option value="OTHER">{{ 'lbl_other' | translate }}</ion-option>
+        <ion-option value="RECOMMENDATION">{{ 'lbl_personal_recommendation' | translate }}</ion-option>
+        <ion-option value="SEARCHENGINE">{{ 'lbl_search_engine' | translate }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  </div>
+    <!-- <div style="padding:0 10px;">
+      <button ion-button block class="redbutton" [disabled]="!ProfileForm.valid"
+        (click)="save()">{{ 'lbl_save' | translate }}</button>
+    </div> -->
+  </form>
+</ion-content>
+
+
+<ion-footer>
+  <ion-navbar>
+
+    
+    <ion-row  *ngIf="viewOne"   (click)="whichView('next')"  >
+      <ion-col col-12 >
+        <button ion-button full class="button"  
+          > 
+        
+        Next </button>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row  *ngIf="viewTwo"  >
+
+      <ion-col col-6 >
+          <button ion-button full class="button" (click)="whichView('previous')" >Previous</button>
+      </ion-col>
+  
+      <ion-col col-6 >
+        
+          <button   ion-button full class="button"  (click)="whichView('submit')" 
+           >Submit</button>
+      </ion-col>
+  
+    </ion-row>
+    
+  </ion-navbar>
+</ion-footer>

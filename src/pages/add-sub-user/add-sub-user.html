@@ -1,0 +1,212 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <!-- // code done by diviya -->
+    <ion-title [ngClass]="{ 'show' : showedits, 'hide': !showedits }" *ngIf="!isEdit">{{ 'lbl_add_subuser' | translate }}</ion-title>
+    <ion-title [ngClass]="{ 'show' : showedits, 'hide': !showedits }" *ngIf="isEdit">{{ 'lbl_edit_subuser' | translate }}</ion-title>
+    <ion-title *ngIf="ischange">{{ 'lbl_change_profile_data' | translate }}</ion-title>
+     <!-- // code done by diviya -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+  <ion-row  >
+    <ion-col col-12 >
+      <ion-label [ngClass]="{ 'show' : showCard, 'hide': !showCard }" class="emm"  ><b>{{'lbl_parent_user' |translate}} :</b>{{usernames}}</ion-label>
+    </ion-col>
+  
+    </ion-row>
+
+
+  <form [formGroup]="AddSubUserForm" class="list-form">
+    <ion-list>
+     
+        <ion-label class="emm" ><b>{{'lbl_general_informaiton' | translate}}</b></ion-label>
+
+
+        <ion-item>
+          <!-- <ion-label stacked>{{ 'lbl_first_name' | translate }}</ion-label> -->
+          <ion-input type="text" placeholder="{{ 'lbl_first_name' | translate}}" [(ngModel)]="user.fname" formControlName="user_fname"></ion-input>
+        </ion-item>
+        <div class="error-message">
+          <span class="err_msg" *ngIf="AddSubUserForm.controls.user_fname.hasError('required')  
+          && (AddSubUserForm.controls.user_fname.dirty || AddSubUserForm.controls.user_fname.touched)">{{'lbl_user_first_name_required' | translate }}</span> 
+        </div>
+
+        <ion-item>
+          <!-- <ion-label stacked>{{ 'lbl_surname' | translate }}*</ion-label>  -->
+          <ion-input type="text" placeholder="{{ 'lbl_surname' | translate}}*" [(ngModel)]="user.lname" formControlName="user_lname"></ion-input>
+        </ion-item>
+        <div class="error-message">
+          <span class="err_msg" *ngIf="AddSubUserForm.controls.user_lname.hasError('required')  
+          && (AddSubUserForm.controls.user_lname.dirty || AddSubUserForm.controls.user_lname.touched)">{{'lbl_user_last_name_required' | translate }}</span> 
+        </div>
+
+        <ion-item>
+          <!-- <ion-label stacked>{{ 'lbl_email' | translate }}</ion-label> -->
+          <ion-input type="email"  placeholder="{{ 'lbl_email' | translate}}" [(ngModel)]="user.email" formControlName="user_email"></ion-input>
+        </ion-item>
+        <div class="error-message">
+          <span class="err_msg" *ngIf="AddSubUserForm.controls.user_email.hasError('required')  
+          && (AddSubUserForm.controls.user_email.dirty || AddSubUserForm.controls.user_email.touched)">{{'lbl_email_required' | translate }}</span> 
+          <span class="err_msg" *ngIf="AddSubUserForm.controls.user_email.hasError('pattern') 
+               && (AddSubUserForm.controls.user_email.dirty )">{{'lbl_email_valid' | translate}} </span>
+
+        </div>
+
+
+        <ion-row>
+          <ion-col col-6  >
+            <ion-item no-lines>
+              <!-- <ion-label stacked>{{ 'lbl_telephone' | translate }}</ion-label> -->
+      
+              <!-- <ion-label stacked>Contact Number</ion-label> -->
+              <!-- <ion-input type="tel" [(ngModel)]="user.phone_code" placeholder="Phone code" formControlName="user_phone_code"></ion-input> -->
+              <ion-input type="tel" placeholder="{{ 'lbl_phone_no' | translate}}*"  [(ngModel)]="user.phone"  formControlName="user_phone" maxlength="12"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6  >
+            <ion-item no-lines>
+              <!-- <ion-label stacked>Mobile Number</ion-label> -->
+              <ion-input type="tel" placeholder="{{ 'lbl_mobile_no' | translate}}" [(ngModel)]="user.mobile" formControlName="user_mobile" maxlength="12"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+
+
+        <!-- <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="AddSubUserForm.controls.user_phone.hasError('required')  
+              && (AddSubUserForm.controls.user_phone.dirty || AddSubUserForm.controls.user_phone.touched )">{{'lbl_phone_no' | translate }}</span> 
+          </div>
+      </div> -->
+      
+      
+        
+        <ion-item>
+          <ion-label >{{ 'lbl_preferred_language' | translate }}*</ion-label>
+          <ion-select [(ngModel)]="user.language"  formControlName="user_language"  required >
+            <ion-option value="">{{ 'lbl_please_select' | translate }}</ion-option>
+            <ion-option value="German">German</ion-option>
+            <ion-option value="French">French</ion-option>
+            <ion-option value="Italian">Italian</ion-option>
+            <ion-option value="English">English</ion-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-message">
+          <span class="err_msg" *ngIf="AddSubUserForm.controls.user_language.hasError('required')  
+          && (AddSubUserForm.controls.user_language.dirty || AddSubUserForm.controls.user_language.touched)">{{'lbl_userLanguage_required' | translate }}</span> 
+        </div>
+
+
+
+        <ion-label class="emm" ><b>{{'lbl_account_info' | translate}}</b></ion-label>
+
+        <ion-item>
+          <ion-label stacked >{{ 'lbl_username_min_6' | translate }}</ion-label>
+          <ion-input type="text" [(ngModel)]="user.username" [disabled]="isEdit" formControlName="user_username" 
+          [(ngModel)]="user.username"  (ngModelChange)="user.username = $event.toLowerCase()" maxlength="16"></ion-input>
+        </ion-item>
+  
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="AddSubUserForm.controls.user_username.hasError('required')  
+              && (AddSubUserForm.controls.user_username.dirty || AddSubUserForm.controls.user_username.touched)">{{'lbl_username_required' | translate }}</span> 
+              <span class="err_msg" *ngIf="AddSubUserForm.controls.user_username.hasError('minlength') 
+               && (AddSubUserForm.controls.user_username.dirty )">{{'lbl_User_Name_length' | translate}} </span>
+               <span class="err_msg" *ngIf="AddSubUserForm.controls.user_username.hasError('maxLength') 
+               && (AddSubUserForm.controls.user_username.dirty )">{{'lbl_User_Name_length' | translate}} </span>
+          </div>
+        </div>
+        <!-- <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="AddSubUserForm.controls.user_username.hasError('required')  
+              && (AddSubUserForm.controls.user_username.dirty || AddSubUserForm.controls.user_username.touched)">{{'lbl_userLanguage_required' | translate }}</span> 
+          </div>
+      </div> -->
+        
+        <ion-item *ngIf="!subUserId" >
+          <ion-label stacked >{{ 'lbl_password_8_char' | translate }}</ion-label>
+          <ion-input type="password" [(ngModel)]="user.password" formControlName="user_password"></ion-input>
+        </ion-item>
+        <div class="error-message">
+          <span class="err_msg" *ngIf="AddSubUserForm.controls.user_password.hasError('required')  
+          && (AddSubUserForm.controls.user_password.dirty || AddSubUserForm.controls.user_password.touched)">{{'lbl_password_required' | translate }}</span> 
+          <span class="err_msg" *ngIf="AddSubUserForm.controls.user_password.hasError('minlength') 
+               && (AddSubUserForm.controls.user_password.dirty)">{{'lbl_password_length' | translate }}  </span>
+        </div>
+
+
+        <ion-item *ngIf="!subUserId">
+          <!-- <ion-label stacked >{{ 'lbl_re_enter_password' | translate }}</ion-label> -->
+          <ion-input type="password" placeholder="{{ 'lbl_re_enter_password' | translate}}"  [(ngModel)]="user.repassword" formControlName="user_repassword"></ion-input>
+        </ion-item>
+  
+        <div class="error-message">
+          <span class="err_msg" *ngIf="!subUserId &&  AddSubUserForm.controls.user_repassword.touched && AddSubUserForm.hasError('mismatchedPasswords') && AddSubUserForm.controls.user_password.valid">{{'lbl_Password_not_matched' | translate }}</span> 
+        </div>
+
+     
+        
+       
+
+      <ion-item>
+        <!-- <ion-label stacked>{{ 'lbl_about_your_self' | translate }}</ion-label> -->
+        <ion-label stacked >{{ 'lbl_about_your_self' | translate }}</ion-label>
+        <ion-textarea type="textarea" [(ngModel)]="user.biodata" placeholder="{{ 'lbl_about_urself' | translate}}" formControlName="user_biodata"></ion-textarea>
+      </ion-item>
+
+      <ion-item [ngClass]="{ 'show' : showCard, 'hide': !showCard }">
+        <ion-label >{{ 'lbl_findout_about_us' | translate }}</ion-label>
+        <ion-select [(ngModel)]="user.site_reference" formControlName="user_site_reference">
+          <ion-option value="FLEET">{{ 'lbl_about_fleet' | translate }}</ion-option>
+          <ion-option value="AD">{{ 'lbl_advertisement' | translate }}</ion-option>
+          <ion-option value="EVENT">{{ 'lbl_event' | translate }}</ion-option>
+          <ion-option value="GARAGE">{{ 'lbl_le_garage' | translate }}</ion-option>
+          <ion-option value="OTHER">{{ 'lbl_other' | translate }}</ion-option>
+          <ion-option value="RECOMMENDATION">{{ 'lbl_personal_recommendation' | translate }}</ion-option>
+          <ion-option value="SEARCHENGINE">{{ 'lbl_search_engine' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item [ngClass]="{ 'show' : showCards, 'hide': !showCards }">
+        <ion-label >{{ 'lbl_status' | translate }} </ion-label>
+        <!-- <ion-select  formControlName="user_status"> -->
+          <ion-label  text-right >{{ 'lbl_active' | translate }}</ion-label>
+        <!-- </ion-select> -->
+      </ion-item>
+
+      <!-- <ion-item *ngIf="!subUserId"  >
+        <button ion-button full class="button" [disabled]="AddSubUserForm.valid"
+        (click)="save()">Register</button>
+    </ion-item> -->
+      
+                           
+      <ion-item *ngIf="!subUserId" >
+          <button ion-button full class="button" [disabled]="!AddSubUserForm.valid"
+          (click)="save()"> {{ 'lbl_register' | translate }}</button>
+      </ion-item>
+ <!-- // code done by diviya -->
+      <ion-item [ngClass]="{ 'show' : showedits, 'hide': !showedits }" *ngIf="subUserId" >
+        <button ion-button full class="button" [disabled]="!AddSubUserForm.valid"
+        (click)="save()">{{'lbl_update' | translate}}</button>
+    </ion-item>
+    <ion-item *ngIf="ischange">
+      <button ion-button full class="button" [disabled]="!AddSubUserForm.valid"
+      (click)="update()">{{'lbl_update' | translate}}</button>
+  </ion-item>
+
+   <!-- // code done by diviya -->
+
+      <ion-item *ngIf="subUserId"  >
+        <button ion-button full class="button" hidden="true"
+        (click)="changepassword()">{{'lbl_change_password' | translate}}</button>
+    </ion-item>
+
+    </ion-list>
+  </form>
+</ion-content>

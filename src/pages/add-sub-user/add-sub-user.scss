@@ -1,0 +1,36 @@
+page-add-sub-user {
+
+    .genderContainer {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        height: 40px !important;
+        align-items: center !important;
+        //padding: 0 !important;
+        padding-left: 10px !important;
+       }
+       .genderContainer ion-item{
+           height: 40px !important;
+       }
+
+
+
+       .emm{
+        padding-left:15px;
+    }
+
+    
+    .hide {
+        display: none;
+     }
+     .show {
+        display: block;
+     }
+
+       
+
+}

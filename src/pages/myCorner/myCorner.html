@@ -1,0 +1,83 @@
+<ion-header no-border >
+<ion-toolbar  >
+    <shared-header [title]="'lbl_my_corner'"></shared-header>
+</ion-toolbar>  
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+        <ion-list-header>
+            {{ 'lbl_my_vehicle' | translate }}
+        </ion-list-header>
+        
+        <ion-item (click)="searchResultsPage('lbl_my_sold_cars', 'My Sold Cars')">
+            {{ 'lbl_vehicles_sold' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+        
+        <ion-item (click)="searchResultsPage('lbl_my_purchased_cars', 'My Purchased Cars')">
+            {{ 'lbl_vehicles_purchased' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="searchResultsPage('lbl_vehicles_in_auktion', 'Cars in Auction')">
+            {{ 'lbl_my_auktion_cars' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="next()">
+            {{ 'lbl_vehicles_in_garage' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="searchResultsPage('lbl_my_favourite_cars', 'My Favourite Cars')">
+            {{ 'lbl_my_favourite_cars' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+
+        <ion-item [navPush]="invoicePage" class="noBorder">
+            {{ 'lbl_my_invoices' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+
+        <ion-list-header [ngClass]="{ 'show' : showCard, 'hide': !showCard }" >{{ 'lbl_sub_users' | translate }}
+        </ion-list-header>
+      
+
+        <!-- <ion-item [navPush]="subUserPage" class="noBorder">
+            {{ 'lbl_add_sub_user' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item> -->
+
+        <ion-item [navPush]="subUserPage" class="noBorder" [ngClass]="{ 'show' : showCard, 'hide': !showCard }">
+            {{ 'lbl_sub_users' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+
+        
+
+        <ion-list-header>
+            {{ 'lbl_profile' | translate }}
+        </ion-list-header>
+        <ion-item  (click)="changeData()" >
+            {{ 'lbl_change_profile_data' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+       
+        <ion-list-header>
+            {{ 'lbl_settings' | translate }}
+        </ion-list-header>
+        <ion-item [navPush]="emailPreferencePage">
+            {{ 'lbl_email_preferences' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+        <ion-item [navPush]="changePasswordPage">
+            {{ 'lbl_change_password' | translate }}
+            <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+        <ion-item  class="noBorder" (click)="deleteUser()"  [ngClass]="{ 'show' : showCard, 'hide': !showCard }">
+            {{ 'lbl_delete_account' | translate }}
+        </ion-item>
+    </ion-list>
+</ion-content>

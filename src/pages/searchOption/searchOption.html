@@ -1,0 +1,23 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Search Options</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+
+
+<ion-header no-border >
+    
+  <ion-toolbar  >
+    <shared-header  [title]="'lbl_search_options'" ></shared-header>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-tabs  tabsPlacement="top">
+  <ion-tab [root]="tab1Root" tabTitle="{{ 'lbl_quick_search' | translate }}"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="{{ 'lbl_search_by_body_type' | translate }}"></ion-tab>
+</ion-tabs>

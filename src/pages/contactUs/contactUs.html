@@ -1,0 +1,274 @@
+<!-- <ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle end>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Contact Us</ion-title>
+    </ion-navbar>
+</ion-header> -->
+<ion-header no-border >
+    <ion-toolbar  >
+        <shared-header [title]="'lbl_contact_us'"></shared-header>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="contact-us">
+
+    <div #map id="map">
+        <img src="assets/images/map.png" />
+    </div>
+
+    <form [formGroup]="ContactForm">
+        <div class="description">
+            <ion-list>
+
+
+                <ion-item  >
+
+                    <i class="fa fa-map-marker customsize" item-left ></i>
+                   <!-- <ion-col col col-3 text-wrap> -->
+                        <P text-wrap style="font-size: 13px; color: black;">Eintauschfahrzeuge24.ch GmbH</P>
+                        <p text-wrap style="font-size: 13px; color: black;">Oberzelgstrasse 3</p>
+                        <p text-wrap style="font-size: 13px; color: black;">8618 Oetwil am See ZH</p>
+                   <!-- </ion-col>  -->
+
+                </ion-item> 
+
+
+                <ion-item (click)="callMe('+41 55 553 40 00')"  >
+                    <i class="fa fa-phone" item-left></i>
+                    {{ 'lbl_pnone_number' |translate }}
+                      
+                </ion-item>
+                <ion-item (click)="callMe('+41 55 553 40 00')" >
+                    <i class="fa fa-fax" item-left></i>
+                    {{ 'lbl_mobile_number' |translate }}
+                    
+                </ion-item>
+
+               
+                    <!-- <i class="fa fa-map-marker customsize " item-left ></i>
+                    <P text-wrap style="font-size: 13px;">{{dado.created_at}}</P>
+                    <p text-wrap style="font-size: 13px;">{{dado.description}}</p>
+                     {{ 'lbl_office_address' |translate }}  -->
+                    
+               
+
+                <ion-item>
+                    <i class="fa fa-envelope" item-left></i>
+                    {{ 'lbl_office_email' |translate }}
+                    
+                </ion-item>
+                <ion-item>
+                    <i class="fa fa-globe" item-left></i>
+                    {{ 'lbl_office_website' |translate }}
+                    
+                </ion-item>
+
+            </ion-list>
+        </div>
+        <ion-list>
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_i_am' |translate }}*</ion-label>
+                <ion-select [(ngModel)]="contact.user_type" formControlName="contact_user_type"  required >
+                    <!-- <ion-option value="private_user">{{ 'lbl_private_user' |translate }}</ion-option> -->
+                    <ion-option value="car_dealer">{{ 'lbl_car_dealer' |translate }}</ion-option>
+                    <ion-option value="other_interested_party">{{ 'lbl_other_interested_party' |translate }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <!-- <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_user_type">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_user_type').hasError(validation.type) && (ContactForm.get('contact_user_type').dirty || ContactForm.get('contact_user_type').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div> -->
+
+            <div class="validation-errors">
+                <div class="error-message">
+      
+                  <span class="err_msg" *ngIf="ContactForm.controls.contact_user_type.hasError('required') 
+                     && (ContactForm.controls.contact_user_type.dirty || ContactForm.controls.contact_user_type.touched )">{{'lbl_type_required' | translate }}</span>
+                </div>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_private_user' |translate }}*</ion-label>
+                <ion-select [(ngModel)]="contact.marketplace" formControlName="contact_marketplace" required >
+                    <ion-option value="Commercial vehicles">{{ 'lbl_commercial_vehicles' |translate }}</ion-option>         
+                    <ion-option value="Motocycles">{{ 'lbl_motobikes' |translate }}</ion-option>
+                          	
+                    <ion-option value="New vehicles">{{ 'lbl_new_cars' |translate }}</ion-option>
+                    <ion-option value="Parts and accessories">{{ 'lbl_parts_accessory' |translate }}</ion-option>
+                    <ion-option value="Used cars">{{ 'lbl_used_car_market' |translate }}</ion-option>
+
+                </ion-select>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_marketplace">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_marketplace').hasError(validation.type) && (ContactForm.get('contact_marketplace').dirty || ContactForm.get('contact_marketplace').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_i_have_a' |translate }}*</ion-label>
+                <ion-select [(ngModel)]="contact.type" formControlName="contact_type" required>
+                    <ion-option value="Commendation">{{ 'lbl_commendation' |translate }}</ion-option>
+                  <ion-option value="Complaint">{{ 'lbl_complaint' |translate }}</ion-option>
+                    <ion-option value="Improvement Suggestion">{{ 'lbl_suggestion' |translate }}</ion-option>
+
+
+                 
+                    <!-- <ion-option value="Claim">{{ 'lbl_claim' |translate }}</ion-option> -->
+
+                    <ion-option value="Miscellaneous">{{ 'lbl_mis' |translate }}</ion-option>
+                     <ion-option value="Question">{{ 'lbl_question' |translate }}</ion-option>
+
+                </ion-select>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_type">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_type').hasError(validation.type) && (ContactForm.get('contact_type').dirty || ContactForm.get('contact_type').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_topic' |translate }}*</ion-label>
+                <ion-select [(ngModel)]="contact.topic" formControlName="contact_topic">
+                    <ion-option value="Add images">{{ 'lbl_add_picture' |translate }}</ion-option>
+                    <ion-option value="Vehicle search">{{ 'lbl_search' | translate }}</ion-option>
+                    <ion-option value="Cost or invoice">{{ 'lbl_cost_invoice' | translate }}</ion-option>
+                    <ion-option value="Check car bid">{{ 'lbl_check_car_bid' | translate }}</ion-option>
+                    <ion-option value="Miscellaneous">{{ 'lbl_mis' |translate }} </ion-option>
+
+                    <!-- <ion-option value="Change car offer">{{ 'lbl_change_car_offer' |translate }}</ion-option>
+                    <ion-option value="Login">{{ 'lbl_login' |translate }}</ion-option>
+                     <ion-option value="Payed services">{{ 'lbl_payed_services' |translate }}</ion-option>
+                    <ion-option value="Check car offer">{{ 'lbl_check_car_offer' |translate }}</ion-option>
+                    <ion-option value="Misc">{{ 'lbl_misc' |translate }}</ion-option>
+                 -->
+                    <ion-option value="Register a new vehicle">{{ 'lbl_regsuter_cars' |translate }}</ion-option>
+                    <ion-option value="Registration">{{ 'lbl_contact_register' |translate }}</ion-option>
+
+
+                   
+                </ion-select>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_topic">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_topic').hasError(validation.type) && (ContactForm.get('contact_topic').dirty || ContactForm.get('contact_topic').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_my_request' |translate }}*</ion-label>
+                <ion-textarea type="text" [(ngModel)]="contact.my_request" formControlName="contact_my_request">
+                </ion-textarea>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_my_request">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_my_request').hasError(validation.type) && (ContactForm.get('contact_my_request').dirty || ContactForm.get('contact_my_request').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_form_of_address' |translate }}*</ion-label>
+                <ion-select [(ngModel)]="contact.prefix_name" formControlName="contact_prefix_name">
+                    <ion-option value="Ms">{{ 'lbl_mrs' |translate }}</ion-option>
+                    <ion-option value="Mr">{{ 'lbl_mr' |translate }}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_contact_first_name' |translate }}*</ion-label>
+                <ion-input type="text" [(ngModel)]="contact.first_name" formControlName="contact_first_name"></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_first_name">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_first_name').hasError(validation.type) && (ContactForm.get('contact_first_name').dirty || ContactForm.get('contact_first_name').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_contact_surname' |translate }}*</ion-label>
+                <ion-input type="text" [(ngModel)]="contact.last_name" formControlName="contact_last_name"></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_last_name">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_last_name').hasError(validation.type) && (ContactForm.get('contact_last_name').dirty || ContactForm.get('contact_last_name').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ion-item>
+                <ion-label stacked>{{ 'lbl_contact_email' |translate }}*</ion-label>
+                <ion-input type="email" [(ngModel)]="contact.email" formControlName="contact_email"></ion-input>
+            </ion-item>
+
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.contact_email">
+                    <div class="error-message"
+                        *ngIf="ContactForm.get('contact_email').hasError(validation.type) && (ContactForm.get('contact_email').dirty || ContactForm.get('contact_email').touched)">
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+
+            <ion-row>
+                <ion-col>
+                    <div class="next-button">
+                        <button ion-button block class="redbutton" [disabled]="!ContactForm.valid"
+                            (click)="request()">{{ 'lbl_send_request' |translate }}</button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-list>
+
+
+
+    </form>
+
+
+
+    <!-- <div class="description">
+        <ion-list>
+            <ion-item [navPush]="registrationPage">
+                <ion-icon name="ios-person-add" item-left></ion-icon>
+                +00 00000 00000
+            </ion-item>
+            <ion-item [navPush]="sellVehiclePage">
+                <ion-icon name="ios-car" item-left></ion-icon>
+                +00 00000 00000
+            </ion-item>
+            <ion-item [navPush]="searchOptionPage">
+                <ion-icon name="ios-search" item-left></ion-icon>
+                test@mail.com
+            </ion-item>
+            <ion-item [navPush]="myCornerPage">
+                <ion-icon name="ios-person" item-left></ion-icon>
+                ef24.ch/carlisting
+            </ion-item>
+            <ion-item [navPush]="signInPage">
+                <ion-icon name="ios-power" item-left></ion-icon>
+                3rd main 4th Street ZH
+            </ion-item>
+        </ion-list>
+    </div> -->
+</ion-content>

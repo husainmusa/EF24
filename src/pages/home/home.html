@@ -1,0 +1,80 @@
+<ion-header no-border>
+   <ion-toolbar  >
+    <shared-header [title]="'lbl_home'" ></shared-header>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+ 
+  <ion-row>
+    <ion-col col-8>
+      <span class="recentSubmission">
+        {{ 'lbl_recent_car_submission' |translate }}
+      </span>
+    </ion-col>
+    <ion-col col-4 class="col-select">
+      <i class="fa fa-sort">
+        <ion-select   [(ngModel)]="sortBy" (ngModelChange)="sortChanged($event)">  
+          <ion-option value="YLH">{{ 'lbl_year_old_new' | translate }}</ion-option>
+          <ion-option value="YHL">{{ 'lbl_year_new_old' | translate }}</ion-option>
+          <ion-option value="PLH">{{ 'lbl_price_low_high' | translate }}</ion-option>
+          <ion-option value="PHL">{{ 'lbl_price_high_low' | translate }}</ion-option>
+          <ion-option value="KLH">{{ 'lbl_od_meter_low_high' | translate }}</ion-option>
+          <ion-option value="KHL">{{ 'lbl_od_high_low' | translate }}</ion-option>
+        </ion-select>
+      </i>
+    </ion-col>
+  </ion-row>
+    
+    
+  
+  
+
+
+  <ion-card *ngFor="let vehicle of auctionData; let i = index " (click)="openVehicleDetailsPage(vehicle)">
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-4>
+          <div *ngIf="vehicle.VehicleImage">
+            <div class="text-center" *ngIf="vehicle.VehicleImage.file_name  != ''"  [ngStyle]="{'background-image': 'url(' +baseUrl+'img/vehicle/orignal/'+vehicle.VehicleImage.file_name+')'}" >
+            </div>
+            <div class="text-center" *ngIf="vehicle.VehicleImage.file_name  == null || vehicle.VehicleImage.file_name  == 'null' || vehicle.VehicleImage.file_name  == '' " style="background: url(assets/images/no-image-available.png)">
+             </div>
+          </div>
+          <div class="text-center" *ngIf="!vehicle.VehicleImage" style="background: url(assets/images/no-image-available.png)">
+          </div>
+        </ion-col>
+        <ion-col col-8>
+          <ion-row>
+            <ion-col col-12 *ngIf="vehicle.Vehicle">
+              <p><b>{{vehicle.Vehicle.brand}} {{vehicle.Vehicle.model}}</b> 
+                <span class="pull-right">
+
+                  <countdown-timer (zeroTrigger)="eventSold($event)"  class="countdown-timer" [timeOnly]="true" [vehicalIndex]="i" [end]= [vehicle.Vehicle.auction_ovr_tym] ></countdown-timer>
+                  <!-- <span *ngIf="vehicle.isOver" style="color: #C5181D;" color="danger">00:00:00</span> -->
+                  <!-- [zeroTrigger]="eventSold(vehicle.isOver)"--> 
+              </span></p>
+              <p>
+                <b><strong *ngIf="vehicle.max_bid_price == null" style="color: #C5181D;" >{{vehicle.Vehicle.min_auction_price}} CHF</strong></b>
+               <b><strong *ngIf="vehicle.max_bid_price != null" style="color: #007721;" >{{vehicle.max_bid_price}} CHF</strong></b>
+               
+              </p>
+              <p>
+                <i class="fa fa-road" aria-hidden="true"></i><b> {{vehicle.Vehicle.kilometers}} KM</b>
+                <i class="fa fa-calendar mar-right-10" aria-hidden="true"></i>  <b>{{vehicle.Vehicle.first_reg }}</b>
+                <!-- | slice:0:4 -->
+                <span class="pull-right">
+                  <button class="soldbutton" *ngIf="vehicle.isOver" ion-button > {{'lbl_sold' | translate}}</button>
+                 </span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content> 

@@ -1,0 +1,22 @@
+<!-- <ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle end>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>About Us</ion-title>
+    </ion-navbar>
+</ion-header> -->
+<ion-header no-border >
+    
+    <ion-toolbar  >
+        <shared-header [title]="'lbl_about_us'"></shared-header>
+    </ion-toolbar>
+    
+</ion-header>
+
+<ion-content padding>
+    <div [innerHTML]="cmsContent">
+
+    </div>
+
+</ion-content>

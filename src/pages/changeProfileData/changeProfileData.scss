@@ -1,0 +1,38 @@
+page-changeprofiledata{
+    .fabButton{
+       // position: absolute;
+        //right: 5px;
+        margin-top: -40px !important;
+        background-color: red !important;
+    }        
+    .profile-image{
+        height: 120px;
+        width: 120px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+    .profile-card{
+        box-shadow: none;
+        border: 0 none;
+    }
+
+    .fab[mini] {
+        /* margin: 8px; */
+        width: 40px;
+        height: 40px;
+        /* line-height: 40px; */
+        position: absolute;
+        /* left: 219px; */
+        right: 130px;
+    }
+
+    .customRadio{
+        width: 86px;
+        padding: unset;
+        margin: unset;    }
+    .comercialText{
+        //background-color: red;
+        padding-left: 10px;
+        padding-top: 5px;
+        }
+}

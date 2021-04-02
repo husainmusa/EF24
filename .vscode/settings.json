@@ -1,0 +1,7 @@
+{
+<<<<<<< HEAD
+    "compile-hero.disable-compile-files-on-did-save-code": false
+=======
+    "debug.javascript.warnOnLongPrediction": false
+>>>>>>> 9e4d2f81d53f7267133de0d6a9f74f6017b5c496
+}

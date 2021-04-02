@@ -1,0 +1,116 @@
+page-cargarage{
+
+
+    ion-buttons button[icon-only].my-style-for-modal {
+        margin: 0 6px;
+        min-width: 36px;
+     }
+
+     .action-buttons{
+        font-size: 12px;
+        height: 36px !important;
+    }
+
+    ion-card img {
+        display: block;
+        width: 100%;
+        /* height: auto; */
+        height: 118px;
+    }
+    .card-md {
+        margin: 10px 10px 35px 10px;
+    }
+
+    p.camera-left {
+        position: relative;
+      
+        padding: -1px;
+        /* width: 10px; */
+        border-radius: 18px;
+        /* background-color: #e81e24; */
+        /* border-bottom: #e2e2e2 1px solid; */
+        padding: 5px 10px 0px 30px;
+        height: 53px;
+        width: 61px;
+        /* border-right: #e2e2e2 1px solid; */
+        /* border-left: #e2e2e2 1px solid; */
+        margin: -34px;
+        /* float: right; */
+        margin-left: -19%;
+        /* -webkit-box-shadow: 0 0 1px rgba(86, 61, 124, 0.2), 0 2px 4px rgba(86, 61, 124, 0.15); */
+        /* box-shadow: 0 0 1px rgba(86, 61, 124, 0.2), 0 2px 4px rgba(86, 61, 124, 0.15); */
+       
+        font-size: large;
+        color: #e81e24;
+        background: rgba(255,255,255, 0.7);
+    }
+    
+    
+
+    .delete-right {
+        position: absolute;
+        /* z-index: 1000000000000000; */
+        padding: -1px;
+        /* width: 10px; */
+        border-radius: 7px;
+        /* background-color: #e81e24; */
+        border-bottom: #e2e2e2 1px solid;
+        padding: 0px 10px 1px 9px;
+        height: 26px;
+        width: 34px;
+        border-right: #e2e2e2 1px solid;
+        border-left: #e2e2e2 1px solid;
+        margin: -1px;
+        /* float: right; */
+        margin-left: 80%;
+        /* -webkit-box-shadow: 0 0 1px rgba(86, 61, 124, 0.2), 0 2px 4px rgba(86, 61, 124, 0.15); */
+        /* box-shadow: 0 0 1px rgba(86, 61, 124, 0.2), 0 2px 4px rgba(86, 61, 124, 0.15); */
+        background-color: white;
+        font-size: large;
+    }
+    .button {
+        border-radius: 10px;
+         height: 30px !important; 
+         font-size: 9px;
+        /* background: #e81e24; */
+        width: 95px;
+        margin: 0px 0px 0px 2px;
+        
+    }
+
+    .card-content-md {
+        padding: 5px 5px 5px 5px;
+    }
+    .add-action-button{
+        font-size: 15px;
+        height: 30px !important;
+        width: 70px;
+        margin-right: 15px;
+        margin-top: 30px;
+        bottom: 10px;
+        text-transform: none;
+        font-size: 10px;
+
+        
+    }
+
+    .add-button{
+        background:#0c291b;
+        height: 30px !important;
+        width: 70px;
+        text-transform: none;
+        font-size: 10px;
+        margin-right: 15px;
+        margin-top: 30px;
+        bottom: 10px;
+      }
+
+      .alertCustomWraper .alert-wrapper {
+        width: 300px;
+        height: 144px;
+        min-height: 145px !important;
+        border-radius: 10px;
+    }
+
+            
+}

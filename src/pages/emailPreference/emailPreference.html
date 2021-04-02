@@ -1,0 +1,25 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Email Preferences</ion-title>
+  </ion-navbar>
+</ion-header> -->
+<ion-header>
+  <shared-header [title]="'lbl_home'"></shared-header>
+</ion-header>
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>{{ 'lbl_send_email_notifications' | translate }}</ion-label>
+      <ion-checkbox [(ngModel)]="send" (ionChange)="statusChange(send)" ></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <div style="padding:0 10px;">
+    <button ion-button block class="redbutton" (click)="save()">{{ 'lbl_save' | translate }}</button>
+  </div>
+
+</ion-content>

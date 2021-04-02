@@ -1,0 +1,146 @@
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>Auction</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+<!-- <ion-header>
+  <shared-header [title]="'lbl_auction'"></shared-header>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="Step3Form">
+    <ion-list class="noMargin">
+      <h5>{{ 'lbl_vehicle_data' | translate }}</h5> 
+      <ion-item>
+        <ion-label>{{ 'lbl_increase_with' | translate }}</ion-label>
+        <ion-select [(ngModel)]="vehicle.increase_with" formControlName="vehicle_increase_with">
+          <ion-option value=50.00 >50</ion-option>
+          <ion-option value=100.00 >100</ion-option>
+          <ion-option value=150.00 >150</ion-option>
+          <ion-option value=200.00 >200</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content> -->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>Auction</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+<ion-header>
+  <shared-header [title]="'lbl_auction'"></shared-header>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="Step3Form">
+    <ion-list class="noMargin">
+
+      <h5>{{ 'lbl_vehicle_data' | translate }}</h5>
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_minimum_price' | translate }}*</ion-label>
+        <!-- <ion-input type="number" placeholder="CHF" [(ngModel)]="vehicle.min_auction_price" formControlName="vehicle.min_auction_price"  (keyup)="changeto()"></ion-input> -->
+         <ion-input type="number" placeholder="CHF" formControlName="vehicle_min_auction_price" (keyup)="changeto()"  ></ion-input> 
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_min_auction_price">
+          <div class="error-message"
+            *ngIf="Step3Form.get('vehicle_min_auction_price').hasError(validation.type) && (Step3Form.get('vehicle_min_auction_price').dirty || Step3Form.get('vehicle_min_auction_price').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+           
+
+      <ion-item>
+        <ion-label stacked>{{ 'Lbl_auction_duration' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.auction_duration" formControlName="vehicle_auction_duration" required="true">
+          <ion-option value="1">24 {{ 'lbl_hours' | translate }}</ion-option>
+          <ion-option value="2">48 {{ 'lbl_hours' | translate }}</ion-option>
+          <ion-option value="3">72 {{ 'lbl_hours' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_auction_duration">
+          <div class="error-message"
+            *ngIf="Step3Form.get('vehicle_auction_duration').hasError(validation.type) && (Step3Form.get('vehicle_auction_duration').dirty || Step3Form.get('vehicle_auction_duration').touched)">
+            {{ validation.message }}
+          </div> 
+        </ng-container>
+      </div>
+      
+  
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_buy_now_price' | translate }}</ion-label>
+
+        <ion-input type="number"  placeholder="CHF"   formControlName="vehicle_buy_price" (keyup)="changetoActual()"  ></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+          <div class="error-message"
+            *ngIf="vehicle.buy_price !='0.00' &&  vehicle.buy_price <= minPrice">
+            {{ 'lbl_buy_now_price_error' | translate }}
+          </div>
+      </div>
+
+      <!-- <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_buy_price">
+          <div class="error-message"
+            *ngIf="Step3Form.get('vehicle_buy_price').hasError(validation.type) && (Step3Form.get('vehicle_buy_price').dirty || Step3Form.get('vehicle_buy_price').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+
+        <div class="error-message"
+        *ngIf="Step3Form.controls.vehicle_buy_price.value <= Step3Form.controls.vehicle_min_auction_price.value  && (Step3Form.controls.vehicle_buy_price.dirty || Step3Form.controls.vehicle_buy_price.touched )">
+          <span  >Buy now Price should be higher than Minimum Price</span>
+        </div>
+
+      </div> -->
+
+      <ion-item>
+        <ion-label>{{ 'lbl_increase_with' | translate }} *</ion-label>
+        <ion-select [(ngModel)]="vehicle.increase_with" formControlName="vehicle_increase_with">
+          <ion-option value=50.00 >50</ion-option>
+          <ion-option value=100.00 >100</ion-option>
+          <ion-option value=150.00 >150</ion-option>
+          <ion-option value=200.00 >200</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>{{ 'lbl_to_be_transported_by_the' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.transport_medium" formControlName="vehicle_transport_medium" required="true">
+          <ion-option value="Transport by Buyer">{{ 'lbl_transporters_buyer' | translate }}</ion-option>
+          <ion-option value="Transport by Seller">{{ 'lbl_transporters_seller' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.vehicle_transport_medium">
+        <div class="error-message"
+          *ngIf="Step3Form.get('vehicle_transport_medium').hasError(validation.type) && (Step3Form.get('vehicle_transport_medium').dirty || Step3Form.get('vehicle_transport_medium').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="next-button  0">
+      <button ion-button block class="redbutton" [disabled]="!Step3Form.valid || vehicle.transport_medium == null ||vehicle.transport_medium == ' ' || vehicle.auction_duration == '0'|| (vehicle.buy_price !='0.00' &&  vehicle.buy_price <= minPrice)"
+        (click)="addVehicle()">{{ 'lbl_save' | translate }}</button>
+
+      <!-- <button ion-button block class="preview-button" [disabled]="!Step3Form.valid  ||  Step3Form.controls.vehicle_min_auction_price.value == 0.00 || Step3Form.controls.vehicle_buy_price.value == 0.00 "
+        (click)="previewVehicle()">{{ 'lbl_preview' | translate }}</button> -->
+        
+    </div>
+  </form>
+
+</ion-content>

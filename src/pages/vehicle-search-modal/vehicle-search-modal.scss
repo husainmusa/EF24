@@ -1,0 +1,48 @@
+page-vehicle-search-modal {
+
+    ion-col.autoRow.col {
+        background-color: #f9f9f9;
+        border-radius: 7px;
+        /* margin-right: 18px; */
+        height: 32px;
+        padding: 5px 8px;
+        margin: 3px 0px;
+        /* vertical-align: middle; */
+    }
+
+
+    .content-scroll
+    {
+    margin: 54px 0px;
+    position: fixed;
+    }
+    .card-content-md {
+        padding: 10px 16px 10px 16px;
+    }
+    .d-flex{
+        display: flex;
+    }
+    ion-col.text-left.col  {text-align: left; margin-left:5px; margin-top: 4px;}
+    .col-2{
+        width: 50%;
+       max-width: 50%;
+    }
+    // .toolbar-title {
+    //     color: #c72125;
+    // }
+    .btn-select {
+        width: 112px;
+        height: 32px !important;
+        border-radius: 10px;
+        background-color: '#e81e24';
+        /* position: absolute; */
+        bottom: -38px !important;
+        right: 5;
+        right: -15px !important;
+        text-transform: capitalize;
+        letter-spacing: 5;
+        float: right;
+       
+    }
+}
+

@@ -1,0 +1,477 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'lbl_registration' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+
+    <ion-list class="registrationForm" >
+
+      <form [formGroup]="RegisterForm" class="list-form">
+
+      <!-- <ion-item no-lines style="text-align: center;" >
+        <ion-label >{{ 'lbl_company_data' | translate }}</ion-label>
+        <ion-label > {{formTitle}} </ion-label>
+      </ion-item> -->
+
+      <h6 style="text-align: center;" >{{formTitle}}</h6>
+
+     <p class="marking" *ngIf="viewThree" >Please note that your username will be displayed if you place a bid</p>
+
+    
+      <div class="sectionOne" [hidden]="!viewOne" >
+
+
+        <div class="comertialArea" >
+
+          <ion-row radio-group formControlName="company_CC" style="height: unset;"  class="customgroup"  >
+            <ion-col col-5 class="leftContainer" >
+              <!-- <ion-label class="comercialText" >Commercial Register</ion-label> -->
+              <p >{{'lbl_Commercial_Register' | translate }}</p>
+            </ion-col>
+    
+          
+            <ion-col col-7 class="rightContainer" >
+              <ion-row class="rightContainerGroup" >
+                <ion-col col-6 class="rightClItem"  >
+                  <ion-item no-lines class="customRadio" >
+                    <ion-label>{{ 'lbl_yes' | translate  }} </ion-label>
+                    <ion-radio value="1"></ion-radio>
+                  </ion-item>
+    
+                </ion-col>
+                <ion-col col-6 class="rightClItem" >
+    
+                  <ion-item no-lines class="customRadio" >
+                    <ion-label>{{ 'lbl_no' | translate  }}</ion-label>
+                    <ion-radio value="0"></ion-radio>
+                  </ion-item>
+    
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+
+        </div>
+    
+      
+
+      
+
+      <ion-item style="border-top:none;">
+        <ion-label floating>{{ 'lbl_company' | translate }}</ion-label>
+        <ion-input type="text"  formControlName="company_name"   required ></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.company_name.hasError('required') 
+               && (RegisterForm.controls.company_name.dirty || RegisterForm.controls.company_name.touched )">{{ 'lbl_Company_Name_required' | translate }}</span>
+          </div>
+      </div>
+
+      <ion-item>
+        <ion-label floating>{{ 'lbl_street_no' | translate }}</ion-label>
+        <ion-input type="text"  formControlName="company_street" required ></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <div class="error-message">
+          <span class="err_msg" *ngIf="RegisterForm.controls.company_street.hasError('required') 
+             && (RegisterForm.controls.company_street.dirty || RegisterForm.controls.company_street.touched )">{{ 'lbl_Street_Number_required' | translate  }} </span>
+        </div>
+    </div>
+
+      
+
+      <ion-item>
+        <ion-label floating>{{ 'lbl_po_box' | translate }}</ion-label>
+        <ion-input type="text" formControlName="company_pob"  ></ion-input>
+      </ion-item>
+
+      <!-- <div class="validation-errors">
+        <div class="error-message">
+          <span class="err_msg" *ngIf="RegisterForm.controls.company_pob.hasError('required') 
+             && (RegisterForm.controls.company_pob.dirty || RegisterForm.controls.company_pob.touched )">Post Box required  </span>
+        </div>
+    </div> -->
+
+
+    <ion-item>
+      <ion-label floating>{{ 'lbl_Post_Code' | translate }}* </ion-label>
+      <ion-input type="text" formControlName="company_post_code" required ></ion-input>
+    </ion-item> 
+
+    <div class="validation-errors">
+      <div class="error-message">
+        <span class="err_msg" *ngIf="RegisterForm.controls.company_post_code.hasError('required') 
+           && (RegisterForm.controls.company_post_code.dirty || RegisterForm.controls.company_post_code.touched )">{{ 'lbl_Post_Code_required' | translate }}</span>
+      </div>
+  </div>
+
+
+
+      <ion-item>
+        <ion-label floating>{{ 'lbl_postcode_town' | translate }}</ion-label>
+        <ion-input type="text" formControlName="company_town" required ></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <div class="error-message">
+          <span class="err_msg" *ngIf="RegisterForm.controls.company_town.hasError('required') 
+             && (RegisterForm.controls.company_town.dirty || RegisterForm.controls.company_town.touched )">{{'lbl_Town_required' | translate  }}  </span>
+        </div>
+    </div>
+
+      <ion-item  >
+        <ion-label  >{{ 'lbl_country' | translate }}</ion-label>
+        <ion-select  formControlName="company_country" required >
+          <!-- <ion-option *ngFor="let country of countyList"  value="{{country.id}}" > {{country.Country}} </ion-option> -->
+          <ion-option *ngFor="let regin of reginList" value="{{regin.region_code}}" >{{regin.region_name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <div class="error-message">
+          <span class="err_msg" *ngIf="RegisterForm.controls.company_country.hasError('required') 
+             && (RegisterForm.controls.company_country.dirty || RegisterForm.controls.company_country.touched )">{{ 'lbl_Country_required' | translate }}  </span>
+        </div>
+    </div>
+
+    </div>
+
+   <div [hidden]="!viewTwo"  >
+
+
+        <ion-item  >
+          <ion-label floating >{{'lbl_First_Name' | translate }}</ion-label>
+          <ion-input type="text" name="fname" formControlName="user_fname"></ion-input>
+          
+        </ion-item>
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_fname.hasError('required') 
+               && (RegisterForm.controls.user_fname.dirty || RegisterForm.controls.user_fname.touched )">{{'lbl_First_Name_required' | translate }}</span>
+
+                <!-- <span class="err_msg" *ngIf="RegisterForm.controls.user_fname.hasError('minlength') 
+               && (RegisterForm.controls.user_fname.dirty || RegisterForm.controls.user_fname.touched )">{{'lbl_User_Name_length' | translate}} </span>
+
+               <span class="err_msg" *ngIf="RegisterForm.controls.user_fname.hasError('maxlength') 
+               && (RegisterForm.controls.user_fname.dirty || RegisterForm.controls.user_fname.touched )">{{'lbl_User_Name_length' | translate}}</span> -->
+          </div>
+      </div>
+
+        <ion-item  >
+          <ion-label floating > {{ 'lbl_Surname' | translate }} </ion-label>
+          <ion-input type="text" name="lname" formControlName="user_lname" required ></ion-input>
+        </ion-item>
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_lname.hasError('required') 
+               && (RegisterForm.controls.user_lname.dirty || RegisterForm.controls.user_lname.touched )">{{'lbl_surname_required' | translate }}</span>
+          </div>
+      </div>
+
+        <ion-item  >
+          <ion-label floating >{{ 'lbl_email' | translate }}</ion-label>
+          <ion-input type="email" name="Email" formControlName="user_email" required ></ion-input>
+        </ion-item>
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_email.hasError('required') 
+               && (RegisterForm.controls.user_email.dirty || RegisterForm.controls.user_email.touched )">{{'lbl_Email_required' | translate }}</span>
+               <span class="err_msg" *ngIf="RegisterForm.controls.user_email.hasError('pattern') 
+               && (RegisterForm.controls.user_email.dirty )">{{'lbl_email_valid' | translate}} </span>
+          </div>
+      </div>
+
+        
+        <!-- <ion-row radio-group formControlName="user_gender" class="genderContainer" >
+          <ion-col col-3  >
+            <ion-label class="comercialText" >{{ 'lbl_gender' | translate  }}*</ion-label>
+          </ion-col>
+  
+          <ion-col col-9 >
+            <ion-row  class="genderContainer">
+              <ion-col col-6 >
+                <ion-item no-lines  >
+                  <ion-label>{{'lbl_Male' | translate }}</ion-label>
+                  <ion-radio value="Male" required ></ion-radio>
+                </ion-item>
+  
+              </ion-col>
+              <ion-col col-6 >
+  
+                <ion-item no-lines  >
+                  <ion-label>{{ 'lbl_Female' | translate }} </ion-label>
+                  <ion-radio value="Female" required ></ion-radio>
+                </ion-item>
+  
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row> -->
+
+        
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_gender.hasError('required') 
+               && (RegisterForm.controls.user_gender.dirty || RegisterForm.controls.user_gender.touched )">{{lbl_Gender_required | translate}}  </span>
+          </div>
+      </div>
+
+        <ion-item  >
+          <ion-label floating >{{'lbl_Telephone' |  translate }}*</ion-label>
+          <ion-input type="tel" name="Telephone" formControlName="user_phone" required maxlength="12"></ion-input>
+        </ion-item>
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_phone.hasError('required') 
+               && (RegisterForm.controls.user_phone.dirty || RegisterForm.controls.user_phone.touched )">{{'lbl_Phone_Number_required' | translate }}</span>
+          </div>
+      </div>
+
+        
+        <ion-item  >
+          <ion-label floating >{{'lbl_Mobile'| translate}}</ion-label>
+          <ion-input type="tel" name="Telephone" formControlName="user_mobile" maxlength="12" ></ion-input>
+        </ion-item>
+
+        <!-- <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_mobile.hasError('required') 
+               && (RegisterForm.controls.user_mobile.dirty || RegisterForm.controls.user_mobile.touched )">{{'lbl_Mobile_Number_required' | translate}}  </span>
+          </div>
+
+          || RegisterForm.controls.user_mobile.value == null  || RegisterForm.controls.user_mobile.value == ''
+      </div> -->
+
+        <ion-item>
+          <ion-label>{{'lbl_Preferred_language' |  translate}}*</ion-label>
+          <ion-select formControlName="user_language" required >
+              <ion-option value="English">English</ion-option>
+              <ion-option value="German">German</ion-option>
+              <ion-option value="French">French</ion-option>
+              <ion-option value="Italian">Italian</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_language.hasError('required') 
+               && (RegisterForm.controls.user_language.dirty || RegisterForm.controls.user_language.touched )">{{'lbl_Preferred_language_required' | translate }}  </span>
+          </div>
+      </div>
+
+      </div>
+
+
+      <div [hidden]="!viewThree"  >
+
+        <ion-item>
+          <ion-label floating>{{ 'lbl_username_min_6' | translate }}</ion-label>
+          <ion-input type="text"  formControlName="user_username" required maxlength="15" min="4"  autocapitalize="off"
+              >
+          </ion-input>
+        </ion-item>
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_username.hasError('required') 
+               && (RegisterForm.controls.user_username.dirty || RegisterForm.controls.user_username.touched )">{{'lbl_User_Name_required' | translate }}  </span>
+
+               <span class="err_msg" *ngIf="RegisterForm.controls.user_username.hasError('minlength') 
+               && (RegisterForm.controls.user_username.dirty )">{{'lbl_User_Name_length' | translate}} </span>
+
+               <!-- <div class="error-message" *ngIf="RegisterForm.controls.user_username.value == abc  && (Step3Form.controls.vehicle_buy_price.dirty || Step3Form.controls.vehicle_buy_price.touched )">
+              <span  >Buy now Price should be higher than Minimum Price</span>
+               </div> -->
+
+               <!-- <span class="err_msg" *ngIf="RegisterForm.controls.user_username.hasError('maxlength') 
+               && (RegisterForm.controls.user_username.dirty  )">{{'lbl_User_Name_length' | translate}}</span> -->
+
+          </div>
+      </div>
+
+        <ion-item>
+          <ion-label floating>{{ 'lbl_password_8_char' | translate }}</ion-label>
+          <ion-input type="password"  formControlName="user_password" required minlength="8"  maxlength="15" ></ion-input>
+        </ion-item>
+
+        <div class="validation-errors">
+          <div class="error-message">
+            <span class="err_msg" *ngIf="RegisterForm.controls.user_password.hasError('required') 
+               && (RegisterForm.controls.user_password.dirty || RegisterForm.controls.user_password.touched )">{{'lbl_password_required' | translate }}</span>
+
+               <span class="err_msg" *ngIf="RegisterForm.controls.user_password.hasError('minlength') 
+               && (RegisterForm.controls.user_password.dirty)">{{'lbl_password_length' | translate }}  </span>
+          </div>
+      </div>
+
+        <ion-item>
+          <ion-label floating>{{ 'lbl_re_enter_password' | translate }}</ion-label>
+          <ion-input type="password"  formControlName="user_repassword" required ></ion-input>
+        </ion-item>
+
+
+       
+
+        <div class="validation-errors">
+          <div class="error-message">
+
+             <span class="err_msg" *ngIf="RegisterForm.controls.user_repassword.hasError('required')  
+               && (RegisterForm.controls.user_repassword.dirty || RegisterForm.controls.user_repassword.touched )">{{'lbl_Confirm_password_required' | translate }}</span> 
+
+                 <!-- <div *ngIf="RegisterForm.controls.user_password != RegisterForm.controls.user_repassword && RegisterForm.controls.user_repassword.touched">{{'lbl_Password_not_matched' | translate }}</div>  -->
+
+               <!--<div *ngIf="RegisterForm.controls.user_repassword.hasError('required') 
+               && (RegisterForm.controls.user_repassword.dirty || RegisterForm.controls.user_repassword.touched )">{{'lbl_Confirm_password_required' | translate }}</div>  -->
+ 
+                 <span class="err_msg" *ngIf="RegisterForm.controls.user_repassword.value != RegisterForm.controls.user_password.value
+               && (RegisterForm.controls.user_repassword.valid )">{{'lbl_Password_not_matched' | translate }}</span>  
+          </div>
+      </div>
+
+        
+
+    
+
+      
+      <!-- <ion-item class='err_msg' *ngIf="RegisterForm.controls.user_repassword.touched && RegisterForm.hasError('mismatchedPasswords') && RegisterForm.controls.user_password.valid">
+        <ion-label no-margin stacked>{{'lbl_Password_not_matched' | translate }}</ion-label>
+      </ion-item> -->
+
+
+      <ion-row  class="termsandconditions" >
+        <ion-col col-1 style="display: flex;" >
+          <ion-row   >
+              <ion-checkbox color="dark"   formControlName="user_terms" required ></ion-checkbox>
+           
+          </ion-row>
+          
+        </ion-col>
+
+        <ion-col col-11 >
+          <ion-row  >
+            <ion-item text-wrap>
+              <ion-label>I hereby confirm that I have read and understood the <a href="https://ef24.ch/agb" target="_blank" style="text-decoration: none;" >General Terms and Conditions</a>  and that I agree to them.*   </ion-label>
+            </ion-item> 
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+        <!-- <ion-item text-wrap>
+          {{ 'lbl_confirm_condition' | translate }}
+          <ion-label>{{ 'lbl_confirm_condition' | translate }}</ion-label>
+          <ion-checkbox color="dark"   formControlName="user_terms" required ></ion-checkbox>
+        </ion-item> 
+
+        Eintauschfahrzeuge24.ch GmbH
+      
+      -->
+
+
+        <ion-row  class="termsandconditions" >
+          <ion-col col-1 style="display: flex;" >
+
+            <ion-row>
+              <ion-checkbox color="dark"  formControlName="user_carauktion_ag" required ></ion-checkbox>
+            </ion-row>
+
+          </ion-col>
+
+          <ion-col col-11 >
+
+            <ion-row  >
+              <ion-item text-wrap>
+                <ion-label>{{ 'lbl_carauktion_authorised' | translate }}</ion-label>
+              </ion-item> 
+            </ion-row>
+            
+          </ion-col>
+        </ion-row>
+
+        
+        <!-- <ion-item text-wrap>
+          <ion-label></ion-label>
+          
+        </ion-item> -->
+
+
+      </div>
+
+    </form>
+
+    </ion-list>
+  
+
+</ion-content>
+
+<ion-footer>
+  <ion-navbar>
+
+    <ion-row  *ngIf="viewOne"    >
+      <ion-col col-12 >
+        <button ion-button full class="button" (click)="whichView('next')" 
+        [disabled]="RegisterForm.controls.company_name.value == null || RegisterForm.controls.company_name.value == ''  
+        ||RegisterForm.controls.company_street.value == null || RegisterForm.controls.company_street.value == '' 
+       || RegisterForm.controls.company_town.value == null  || RegisterForm.controls.company_town.value == ''
+        || RegisterForm.controls.company_country.value == null   "  > 
+        
+         {{'lbl_next' | translate }} </button>
+      </ion-col>
+    </ion-row>
+
+    <!--
+
+      || RegisterForm.controls.company_pob.value == null || RegisterForm.controls.company_pob.value == '' || 
+
+      || RegisterForm.controls.company_post_code.value == null || RegisterForm.controls.company_post_code.value == ''
+
+      || RegisterForm.controls.user_language.value == null || RegisterForm.controls.user_language.value == ''
+    
+    -->
+
+    <ion-row *ngIf="!viewOne"  >
+
+      <ion-col col-6 >
+          <button ion-button full class="button" (click)="whichView('previous')" >{{'lbl_Previous' | translate }}</button>
+      </ion-col>
+  
+      <ion-col col-6 >
+        
+          <button *ngIf="!viewThree" ion-button full class="button" (click)="whichView('final')"
+          [disabled]="RegisterForm.controls.user_fname.value == null || RegisterForm.controls.user_fname.value == ''
+          || RegisterForm.controls.user_lname.value == null || RegisterForm.controls.user_lname.value == ''
+          || RegisterForm.controls.user_email.value == null || RegisterForm.controls.user_email.value == ''
+          || RegisterForm.controls.user_language.value == null || RegisterForm.controls.user_language.value == ''
+          || RegisterForm.controls.user_phone.value == null  || RegisterForm.controls.user_phone.value == ''|| RegisterForm.controls.user_email.hasError('pattern')
+          
+            " 
+          >
+          {{'lbl_next' | translate }}</button>
+
+          <button *ngIf="viewThree" ion-button full class="button" [disabled]="RegisterForm.controls.user_username.value == null || RegisterForm.controls.user_username.value == '' 
+          || RegisterForm.controls.user_lname.value == null || RegisterForm.controls.user_lname.value == ''
+          || RegisterForm.controls.user_password.value == null || RegisterForm.controls.user_password.value == ''
+          || RegisterForm.controls.user_terms.value == false 
+          || RegisterForm.controls.user_password.value != RegisterForm.controls.user_repassword.value 
+          || RegisterForm.controls.user_carauktion_ag.value == false"  (click)="whichView('submit')" 
+           >{{'lbl_Submit' | translate }}</button>
+      </ion-col>
+  
+    </ion-row>
+    
+  </ion-navbar>
+</ion-footer>
+

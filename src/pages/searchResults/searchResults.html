@@ -1,0 +1,134 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle end>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{title | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+      
+<ion-content>
+    <!-- <ion-toolbar style="color:red;font-weight:bold;" *ngIf="subTitle">
+        {{subTitle | translate}}
+    </ion-toolbar> -->
+  <div *ngIf="auctionData.length">
+    <ion-card *ngFor="let vehicle of auctionData; let i=index" (click)="openVehicleDetailsPage(vehicle)">
+        <ion-card-content>
+            <ion-row>
+              <ion-col col-4>
+                <div class="text-center" *ngIf="vehicle.VehicleImage">
+                    <img *ngIf="vehicle.VehicleImage.file_name  != null && vehicle.VehicleImage.file_name  != '' " class="vehicle-image img-thumbnail" src="{{baseUrl}}/img/vehicle/orignal/{{vehicle.VehicleImage.file_name}}" />
+                    <img *ngIf="vehicle.VehicleImage.file_name  == '' " class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" />
+                    <!-- <img *ngIf="vehicle.VehicleImage.file_name  " class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" /> -->
+                </div>
+                <div class="text-center" *ngIf="!vehicle.VehicleImage">
+                    <img class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" />
+                </div>
+              </ion-col>
+              <ion-col col-8>
+                <ion-row *ngIf="vehicle.Vehicle">
+                  <ion-col col-12>
+                    <p>{{vehicle.Vehicle.brand}} {{vehicle.Vehicle.model}}
+                        <span *ngIf="title == 'Cars In Auction'" class="pull-right"><countdown-timer class="countdown-timer" [timeOnly]="true" [end]= [vehicle.Vehicle.auction_ovr_tym] ></countdown-timer></span>
+                        <span class="pull-right" *ngIf="pagetype == 'search' || bodyType!=''">
+                          <countdown-timer (zeroTrigger)="eventSold($event)"  class="countdown-timer1" [timeOnly]="true" [vehicalIndex]="i" [end]= [vehicle.Vehicle.auction_ovr_tym] ></countdown-timer>
+                        </span>
+                      </p>
+                    <p>
+                     CHF<strong>{{vehicle.Vehicle.min_auction_price}}</strong>                     
+                    </p>
+                    <p>
+                      <i class="fa fa-road" aria-hidden="true"></i> {{vehicle.Vehicle.kilometers}} KM
+                      <i class="fa fa-calendar mar-right-10" aria-hidden="true" *ngIf="vehicle.Vehicle.first_reg != ''"></i> {{vehicle.Vehicle.first_reg  }}
+                      <span class="pull-right" *ngIf="pagetype == 'search' || bodyType!=''">
+                        <button class="soldbutton" *ngIf="vehicle.isOver" ion-button > {{'lbl_sold' | translate}}</button>
+                       </span>
+                    </p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="isAcution && auctionData.length < 1">
+    <ion-item style="text-align:center;" *ngIf="pagetype == 'search' || bodyType!=''">
+      {{'lbl_no_result_found' | translate}}
+    </ion-item>
+  </div>
+  <div *ngIf="favouriteData.length">
+    <ion-card *ngFor="let vehicle of favouriteData" (click)="openVehicleDetailsPage(vehicle)">
+        <ion-card-content>
+            <ion-row>
+              <ion-col col-4>
+                <div class="text-center" *ngIf="vehicle.VehicleImage">
+                    <img *ngIf="vehicle.VehicleImage.file_name  !== 'null' && vehicle.VehicleImage.file_name  !== '' " class="vehicle-image img-thumbnail" src="{{baseUrl}}img/vehicle/orignal/{{vehicle.VehicleImage.file_name}}" />  
+                    <img *ngIf="vehicle.VehicleImage.file_name  == null || vehicle.VehicleImage.file_name  == 'null' || vehicle.VehicleImage.file_name  == '' " class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" />
+                </div>
+                <div class="text-center" *ngIf="!vehicle.VehicleImage">
+                    <img class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" />
+                </div>
+              </ion-col>
+              <ion-col col-8>
+                <ion-row *ngIf="vehicle.Vehicle">
+                  <ion-col col-12>
+                    <p>{{vehicle.Vehicle.brand}} {{vehicle.Vehicle.model}} <span *ngIf="title == 'My Favourite Cars'" class="pull-right"><countdown-timer class="countdown-timer" [timeOnly]="true" [end]= [vehicle.Vehicle.auction_ovr_tym] ></countdown-timer></span></p>
+                    <p>
+                      CHF<strong>{{vehicle.Vehicle.min_auction_price}}</strong>
+                    </p>
+                    <p>
+                      <i class="fa fa-road" aria-hidden="true"></i> {{vehicle.Vehicle.kilometers}} KM
+                      <i class="fa fa-calendar mar-right-10" aria-hidden="true" *ngIf="vehicle.Vehicle.first_reg != ''" ></i> {{vehicle.Vehicle.first_reg  }}
+                    </p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+    </ion-card> 
+  </div>
+  <div *ngIf="actionType == 'favourite_vehicles' && favouriteData.length < 1 && isProcessed">
+    <ion-item style="text-align:center;" *ngIf="pagetype == 'search' || bodyType!=''">
+      {{'lbl_no_result_found' | translate}}
+    </ion-item>
+  </div>
+  <div *ngIf="myAuctionData.length">
+    <ion-card *ngFor="let vehicle of myAuctionData" (click)="openVehicleDetailsPage(vehicle)">
+        <ion-card-content>
+            <ion-row>
+              <ion-col col-4>
+                <div class="text-center" *ngIf="vehicle.VehicleImage">
+                    <img *ngIf="vehicle.VehicleImage.file_name  !== null  " class="vehicle-image img-thumbnail" src="{{baseUrl}}img/vehicle/orignal/{{vehicle.VehicleImage.file_name}}" />
+                    <img *ngIf="vehicle.VehicleImage.file_name  == null || vehicle.VehicleImage.file_name  == 'null' || vehicle.VehicleImage.file_name  == '' " class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" />            
+                </div>
+                <div class="text-center" *ngIf="!vehicle.VehicleImage">
+                    <img class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" />
+                </div>
+              </ion-col>
+              <ion-col col-8>
+                <ion-row *ngIf="vehicle.Vehicle">
+                  <ion-col col-12>
+                    <p>{{vehicle.Vehicle.brand}} {{vehicle.Vehicle.model}} <span *ngIf="actionType == 'vehicles_in_auction'" class="pull-right"><countdown-timer class="countdown-timer" [timeOnly]="true" [end]= [vehicle.Vehicle.auction_ovr_tym] ></countdown-timer></span></p>
+                    <p>
+                      CHF<strong>{{vehicle.Vehicle.min_auction_price}}</strong>
+                      
+                    </p>
+                    <p>
+                      <i class="fa fa-road" aria-hidden="true"></i> {{vehicle.Vehicle.kilometers}} KM
+                      <i class="fa fa-calendar mar-right-10" aria-hidden="true" *ngIf="vehicle.Vehicle.first_reg != ''"></i> {{vehicle.Vehicle.first_reg  }}
+                    </p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="(actionType == 'vehicles_in_auction' || actionType == 'lbl_my_purchased_cars' || actionType == 'vehicles_sold') && myAuctionData.length < 1 && isProcessed">
+    <ion-item style="text-align:center;" *ngIf="pagetype == 'search' || bodyType!=''">
+      {{'lbl_no_result_found' | translate}}
+    </ion-item>
+  </div>
+  
+</ion-content>

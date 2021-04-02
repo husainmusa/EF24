@@ -1,0 +1,95 @@
+
+<ion-header>
+  <ion-navbar>
+    
+    <ion-title>{{ 'lbl_add_advertisement' | translate}} </ion-title>
+    
+  </ion-navbar>
+  </ion-header>
+    
+    
+  
+  <ion-content>
+      <ion-card *ngFor="let vehicleObj of vehiclesData" >
+        <ion-card-content>
+          <div style="display: flex;
+          align-items: center;
+          justify-content: center;" >
+            <span style="text-align: center;" >{{vehicleObj.TypEn}}</span>
+          </div>
+          
+          <ion-row  >
+            <ion-col col-2 >
+              <ion-row class="autoRow">
+                <span>Seats</span>
+              </ion-row>
+  
+              <ion-row class="autoRow">
+                <span>Gear</span>
+              </ion-row>
+  
+              <ion-row class="autoRow">
+                <span>Fuel</span>
+              </ion-row>
+              
+            
+            </ion-col>
+            <ion-col col-3 >
+              <ion-row>
+                <span>{{vehicleObj.Platze}}</span>
+              </ion-row>
+  
+              <ion-row>
+                <span>{{vehicleObj.Gange}}</span>
+              </ion-row>
+  
+              <ion-row>
+                <span>{{vehicleObj.Treibstoff}}</span>
+              </ion-row>
+                
+              
+            </ion-col>
+            <ion-col col-7 >
+              <ion-row>
+                <ion-col col-7 >
+                  <span>Performance</span>
+                </ion-col>
+                <ion-col col-5 >
+                  
+                  <ion-row>
+                    <span>{{vehicleObj.GesamtKW}}</span>
+                  </ion-row>
+  
+                  
+                  
+                </ion-col>
+              </ion-row>
+  
+  
+              <!-- <ion-row></ion-row> -->
+                <button ion-button small style="width: 70px;
+                height: 31px !important;
+                border-radius: 5px;
+                background-color: '#e81e24';
+                position: absolute;
+                bottom: -8px !important;
+                right: 5;
+                right: -8px !important;" (click)="selectedCar(vehicleObj)" >Select</button>
+              
+  
+            </ion-col>
+          </ion-row>
+  
+         
+        </ion-card-content>
+        
+      </ion-card>
+  
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar color="danger">
+      <button color="danger" ion-button full (click)="closeModal()">{{ 'lbl_close' | translate }}</button>
+    </ion-toolbar>
+  </ion-footer>

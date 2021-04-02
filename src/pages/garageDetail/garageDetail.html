@@ -1,0 +1,130 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle end>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>{{subUser.model_type}} {{subUser.body_type}}</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+  <ion-content>
+
+    <ion-card  >
+      <ion-card-content>
+
+        <img *ngIf="subUser.original  != null "  style="width:20%;  " src="{{subUser.original}}" />
+        <img *ngIf="!subUser.original " style="width:20%; "  src="assets/images/no-image-available.png" />
+  
+        <!-- <ion-slides *ngIf="subUser.VehicleDoc" class="imageSlider" autoplay="5000" loop="true" speed="500" class="slides" pager="true"  >
+          <ion-slide *ngFor="let image of subUser.VehicleDoc ">
+            <img *ngIf="image.file_type == 2" style="width:100%;" src="{{baseUrl}}img/vehicle/orignal/{{image.file_name}}" />
+            <img *ngIf="image.file_type == 1" style="width:100%;" src="{{baseUrl}}files/doc/{{image.file_name}}" />
+          </ion-slide>
+        </ion-slides> -->
+       
+      </ion-card-content>
+    </ion-card>
+
+  
+   
+  
+  
+    <div>
+    
+  
+      
+  
+  
+  
+
+  
+      <ion-row class="separator"> 
+        <ion-col col-12>
+          <i class="fa fa-tachometer" aria-hidden="true"></i> {{subUser.hp}} PS
+        </ion-col>
+      </ion-row>
+  
+  
+      <ion-row class="separator">
+        <ion-col col-12>
+          <h6 class="vehicle-detail-title">
+            <strong>{{ 'lbl_vehicle_details' | translate }}</strong>
+          </h6>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>
+          {{ 'lbl_body_type' | translate }}
+        </ion-col>
+        <ion-col col-7 *ngIf="subUser.body_type !='null' " >
+          {{subUser.body_type}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>
+          {{ 'lbl_door_count' | translate }}
+        </ion-col>
+        <ion-col col-7 *ngIf="subUser.doors !='null' " >
+          {{subUser.doors}}
+        </ion-col>
+      </ion-row>
+  
+    
+  
+     
+  
+     
+  
+     
+  
+      
+  
+    
+  
+    
+      <ion-row>
+        <ion-col col-5>
+          {{ 'lbl_gear_type' | translate }}
+        </ion-col>
+        <ion-col col-7 *ngIf="subUser.gear !='null' " >
+          {{subUser.gear}}
+        </ion-col>
+      </ion-row>
+  
+      <ion-row> 
+        <ion-col col-5>
+          {{ 'lbl_fuel' | translate }}
+        </ion-col>
+        <ion-col col-7 *ngIf="subUser.fuel !='null' " >
+          {{subUser.fuel}}
+        </ion-col>
+      </ion-row>
+      
+     
+
+  
+     
+  
+        <ion-row>
+          <ion-col col-5>
+            {{ 'lbl_body' | translate }}
+          </ion-col>
+          <ion-col col-7 *ngIf="subUser.body_type !='null' " >
+            {{subUser.body_type}}
+          </ion-col>
+        </ion-row>
+  
+      
+  
+ 
+  
+    
+  
+
+  
+     
+    
+  
+    </div>
+  </ion-content>      

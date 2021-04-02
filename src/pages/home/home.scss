@@ -1,0 +1,101 @@
+page-home {
+    ion-slides {
+        height: 200px;
+    }
+    ion-slide img{
+        height: 200px !important;
+    }
+    ion-item{
+        background: red !important;
+        color:white !important;
+        margin:10px 0 !important;
+    }
+    ion-row{
+        /*background: red; */
+        background: #FFFFFF;
+        color: #000000;
+        line-height: 25px;
+    }
+    .soldbutton {
+        border-radius: 25px;
+        height: 20px !important;
+        font-size: 11px;
+        background: #343434;
+    }
+    .col-select{
+        padding: 12px 0px;
+        ion-select{
+            padding: unset;
+            max-width: 88%;
+            font-size: 13px;
+        }
+    }
+     i.fa.fa-sort {
+       
+        // display: inline-block;
+        // font-size: 2rem;
+        // float: right;
+        // /* text-align: right; */
+        // margin: 10px -20px;
+    }
+    ion-select{
+        // background-image: url(https://cdn1.iconfinder.com/data/icons/zeir-miscellaneous-006/64/sort_by_arrow_cellular_data-256.png);
+        float: right;
+        // background-repeat: no-repeat;
+        // background-size: 70%;
+    }
+
+    // ion-option{
+
+    //         background-image: url(https://cdn1.iconfinder.com/data/icons/zeir-miscellaneous-006/64/sort_by_arrow_cellular_data-256.png);
+
+    // }
+    ion-card{
+        margin: 8px;
+        width: 100%;
+    }
+
+    .card-content-md{
+        padding: 0px;
+    }
+    .recentSubmission{
+        font-size: 14px;
+        padding: 10px;
+        color: red;
+        line-height: 40px;
+    }
+    .text-center {
+        text-align: center;
+        background: transparent;
+        padding: 3px;
+        width: 100%;
+        height: 80px;
+        background-size: 100px 100% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        // border: 1px solid;
+    }
+    .countdown-timer {
+        /*background: red;
+        color: white;*/
+        padding: 4px;
+        font-size: 12px;
+        border-radius: 3px;
+        //background: #000000;
+        color: #000000;
+    }
+    .vehicle-image {
+        margin-top: 0px;
+        -webkit-border-radius: 0px;
+        border-radius: 0px;
+    }
+    .card-content-ios{
+        padding: 5px;
+    }
+    .mar-right-10 {
+        margin-left: 10px;
+    }
+    .text-center {
+        text-align: center;
+    }
+}

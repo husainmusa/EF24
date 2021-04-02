@@ -1,0 +1,9 @@
++ @ngx-translate/core@9.1.1
++ @ngx-translate/http-loader@6.0.0
+updated 2 packages and audited 1125 packages in 28.612s
+
+16 packages are looking for funding
+  run `npm fund` for details
+
+found 5 low severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details

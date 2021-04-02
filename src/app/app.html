@@ -1,0 +1,47 @@
+<ion-menu [content]="content" side="left" >
+  <!-- <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ 'lbl_menu' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <ion-content>
+    <ion-list>
+        <ion-card text-center class="hide-card profile-pic-card">
+
+            <!-- <i menuClose class="fa fa-window-close closebtn"></i> -->
+            <ion-icon menuClose class="closebtn" ios="ios-close" md="md-close"></ion-icon>
+
+            <!-- <div text-center>
+              <ion-img width="180vm" height="180vm" src="assets/images/logo.png"></ion-img>  
+           </div>  -->
+         
+
+            <img  class="center" src="assets/images/image 7 1.png"  /> 
+
+
+            <img *ngIf="profileImage" [src]="profileImage" class="custom-avatar" (click)="presentActionSheet()" />
+            <!-- <img *ngIf="!profileImage" src="assets/images/no-user.png" class="custom-avatar" (click)="presentActionSheet()" /> -->
+            <h2>{{ firstname }} {{ lastname }}</h2>
+           
+        </ion-card>
+
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <!-- <ion-icon name="{{p.icon}}"></ion-icon> -->
+        <i class="fa fa-{{p.icon}}"></i>
+        {{ p.title | translate }}
+      </button>
+
+
+      
+      <button menuClose ion-item (click)="logout()">
+          <i class="fa fa-sign-out"></i>
+        {{ 'lbl_log_out' | translate }}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

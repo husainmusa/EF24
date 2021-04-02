@@ -1,0 +1,129 @@
+<!-- <ion-header>
+  <ion-navbar hideBackButton>    
+    <ion-title>Sign In</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<!-- <ion-content>
+    <ion-list>
+
+      <ion-item class="login-logo">
+        <img src="assets/images/logo.png" />
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="account.username" name="username" placeholder="Username"></ion-input>
+      </ion-item>
+
+      <ion-item>                                                                                        
+        <ion-input type="password" [(ngModel)]="account.password" name="password" placeholder="Password"></ion-input>
+      </ion-item>
+
+      <ion-row padding>
+        <ion-col col-12>
+          <button ion-button block full color="danger" (click)="doLogin()">Login</button>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button full class="blackbutton" [navPush]="registrationPage">Register</button>
+        </ion-col>        
+      </ion-row>
+
+      <ion-item class="forgot-password" [navPush]="homePage">
+        <span>Forgot Password?</span>        
+      </ion-item>
+
+    </ion-list>
+  
+</ion-content> -->
+<!-- <ion-footer>
+  <ion-toolbar>
+    <button ion-button full class="redbutton" [navPush]="homePage">
+      Skip Sign In
+    </button>
+  </ion-toolbar>
+</ion-footer> -->
+
+<!-- -->
+<ion-content no-bounce padding class="scroll login auth-page">
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center>
+      <div class="logo"></div>
+    </div>
+
+    <!-- Login form -->
+    <form [formGroup]="loginForm"  class="list-form">
+      <ion-item>
+        <ion-label floating>
+          <!-- <ion-icon name="mail" item-start class="text-primary"></ion-icon> -->
+          <i class="fa fa-envelope-o"></i>
+          {{ 'lbl_username_email' | translate }}
+        </ion-label>
+        <ion-input type="text" class="form-controll" [(ngModel)]="account.username" formControlName="username" (ngModelChange)="account.username = $event.toLowerCase()"  autocapitalize="off" ></ion-input>
+      </ion-item> 
+      
+       <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.username">
+            <div class="error-message" *ngIf="loginForm.get('username').hasError(validation.type) && (loginForm.get('username').dirty || loginForm.get('username').touched)">
+              {{ validation.message | translate }}
+            </div>
+          </ng-container>
+        </div>
+
+      <ion-item>
+        <ion-label floating>
+            <i class="fa fa-key"></i>
+          <!-- <ion-icon name="lock" item-start class="text-primary"></ion-icon> -->
+          {{ 'lbl_password' | translate }}
+        </ion-label>
+        <ion-input type="password" class="form-controll" [(ngModel)]="account.password" formControlName="password" autocapitalize="off" ></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.password">
+          <div class="error-message" *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+            {{ validation.message | translate }}
+          </div>
+        </ng-container>
+      </div>
+    </form>
+
+    <p text-right ion-text color="dark" tappable (click)="forgotPass()"><strong>{{ 'lbl_forgot_password' | translate }}</strong></p>
+
+    <div>
+      <button class="ion-button" ion-button icon-start block color="dark" (click)="doLogin()" tappable type="submit" [disabled]="!loginForm.valid">
+        <ion-icon name="log-in"></ion-icon>
+        {{ 'lbl_sign_in' | translate }}
+      </button>
+
+      <!-- <p text-center ion-text color="secondary">Or Sign in with:</p>
+
+      <ion-grid>                                                                                                                                                                                   
+        <ion-row>
+          <ion-col col-4>
+            <button ion-button icon-only block class="btn-facebook">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button icon-only block class="btn-twitter">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4>
+            <button ion-button icon-only block class="btn-gplus">
+              <ion-icon name="logo-googleplus"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+
+    </div>
+
+
+    <!-- Other links -->
+    <div text-center margin-top>
+      <span ion-text color="dark" tappable [navPush]="registrationPage">{{ 'lbl_new_here' | translate }} <strong>{{ 'lbl_sign_up' | translate }}</strong></span>
+    </div>
+
+  </div>
+</ion-content>

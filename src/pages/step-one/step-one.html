@@ -1,0 +1,578 @@
+
+<ion-header>
+  <shared-header [title]="'lbl_vehicle_data'"></shared-header>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="Step1Form">
+    <ion-list class="noMargin">
+
+      <h5>{{ 'lbl_vehicle_data' | translate }}</h5>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_make' | translate }}*</ion-label>
+        <ion-input type="text" [(ngModel)]="vehicle.brand" formControlName="vehicle_brand" readonly ></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_brand">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_brand').hasError(validation.type) && (Step1Form.get('vehicle_brand').dirty || Step1Form.get('vehicle_brand').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_model' | translate }}*</ion-label>
+        <ion-input type="text" [(ngModel)]="vehicle.model" formControlName="vehicle_model" readonly ></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_model">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_model').hasError(validation.type) && (Step1Form.get('vehicle_model').dirty || Step1Form.get('vehicle_model').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_type' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="vehicle.type" formControlName="vehicle_type" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_body_type' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.body_type" formControlName="vehicle_body_type" disabled="true" >
+          <!-- <ion-option value="Bus"> {{ 'lbl_Bus' | translate }} </ion-option>
+          <ion-option value="Cabrio">{{ 'lbl_Cabriolet' | translate }}</ion-option>
+          <ion-option value="Coupe">{{ 'lbl_Coupe' | translate }}</ion-option>
+          <ion-option value="Kleinwagen">{{ 'lbl_Small_car' | translate }}</ion-option>
+          <ion-option value="Kombi">{{ 'lbl_Station_wagon' | translate }}</ion-option>
+          <ion-option value="Limousine">{{ 'lbl_Limousine' | translate }}</ion-option>
+          <ion-option value="Minivan">{{ 'lbl_Minivan' | translate }}</ion-option>
+          <ion-option value="Pickup">{{ 'lbl_Pickup' | translate }}</ion-option>
+          <ion-option value="Off-road vehicle/SUV">{{ 'lbl_SUV_Offroader' | translate }}</ion-option> -->
+
+
+          <ion-option value="Limousine">Limousine</ion-option>
+          <ion-option value="Station wagon">Station wagon</ion-option>
+          <ion-option value="Coupe">{{ 'lbl_Coupe' | translate }}</ion-option>
+          <ion-option value="Large capacity/van">Large capacity/van</ion-option>
+          <ion-option value="Off-road vehicle/SUV">{{ 'lbl_SUV_Offroader' | translate }}</ion-option>
+          <ion-option value="Pick up">Pick up</ion-option>
+          <ion-option value="Sports car">Sports car</ion-option>
+
+        </ion-select>
+      </ion-item>
+
+
+      
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_body_type">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_body_type').hasError(validation.type) && (Step1Form.get('vehicle_body_type').dirty || Step1Form.get('vehicle_body_type').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_doors' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.doors" formControlName="vehicle_doors" disabled="true" >
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="5">5</ion-option>
+          <ion-option value="6">6</ion-option>
+          <ion-option value="7">7</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_doors">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_doors').hasError(validation.type) && (Step1Form.get('vehicle_doors').dirty || Step1Form.get('vehicle_doors').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- <ion-item>
+        <ion-label stacked>{{ 'lbl_displacement' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="vehicle.displacement" formControlName="vehicle_displacement"></ion-input>
+      </ion-item> -->
+
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_wheel_drive' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.wheel_drive" formControlName="vehicle_wheel_drive" disabled="true" >
+          <ion-option value="All-wheel">{{ 'lbl_allwheal' | translate }}</ion-option>
+          <ion-option value="Front">{{ 'lbl_front' | translate }}</ion-option>
+          <ion-option value="Heck">{{ 'lbl_Heck' | translate }}</ion-option>
+          <ion-option value="4x4">4x4</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_wheel_drive">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_wheel_drive').hasError(validation.type) && (Step1Form.get('vehicle_wheel_drive').dirty || Step1Form.get('vehicle_wheel_drive').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_gears' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.gear" formControlName="vehicle_gear" disabled="true" >
+          <ion-option value="Manuell">{{ 'GEAR_TYPE_1' | translate }}</ion-option>
+          <ion-option value="Mech.-Aut.">{{ 'GEAR_TYPE_2' | translate }}</ion-option>
+          <ion-option value="Automat">{{ 'GEAR_TYPE_5' | translate }}</ion-option>
+          <ion-option value="Stufenlos">{{ 'GEAR_TYPE_6' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_gear">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_gear').hasError(validation.type) && (Step1Form.get('vehicle_gear').dirty || Step1Form.get('vehicle_gear').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_fuel' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.fuel" formControlName="vehicle_fuel" >
+          <ion-option value="Patrol">{{ 'FUEL_TYPE_1' | translate }}</ion-option>
+          <ion-option value="Petrol Cat">{{ 'FUEL_TYPE_2' | translate }}</ion-option>
+          <ion-option value="Diesel">{{ 'FUEL_TYPE_3' | translate }}</ion-option>
+          <ion-option value="Diesel Particle Filter">{{ 'FUEL_TYPE_4' | translate }}</ion-option>
+          <ion-option value="Gas/Petrol">{{ 'FUEL_TYPE_5' | translate }}</ion-option>
+          <ion-option value="Ethanol/Petro">{{ 'FUEL_TYPE_6' | translate }}</ion-option>
+          <ion-option value="Electric/Diesel">{{ 'FUEL_TYPE_7' | translate }}</ion-option>
+          <ion-option value="Electric">{{ 'FUEL_TYPE_8' | translate }}</ion-option>
+          <ion-option value="Hydrogen">{{ 'FUEL_TYPE_9' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_fuel">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_fuel').hasError(validation.type) && (Step1Form.get('vehicle_fuel').dirty || Step1Form.get('vehicle_fuel').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_performance' | translate }}*</ion-label>
+        <ion-input type="number" [(ngModel)]="vehicle.hp" placeholder="PS" formControlName="vehicle_hp" (keyup)="changeToKW()" readonly ></ion-input>
+        <ion-input type="number" [(ngModel)]="vehicle.kw" placeholder="KW" formControlName="vehicle_kw" (keyup)="changeToHP()" readonly></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_hp">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_hp').hasError(validation.type) && (Step1Form.get('vehicle_hp').dirty || Step1Form.get('vehicle_hp').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_kw">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_kw').hasError(validation.type) && (Step1Form.get('vehicle_kw').dirty || Step1Form.get('vehicle_kw').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_number_of_seats' | translate }}</ion-label>
+        <ion-select [(ngModel)]="vehicle.no_of_seats" formControlName="vehicle_no_of_seats" disabled="true" >
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="5">5</ion-option>
+          <ion-option value="6">6</ion-option>
+          <ion-option value="7">7</ion-option>
+          <ion-option value="8">8</ion-option>
+          <ion-option value="9">9</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <h5>{{ 'lbl_further_information' | translate }}</h5>
+
+      <ion-item>
+        <!-- <ion-input type="text" placeholder="1st Reg." [(ngModel)]="first_reg"></ion-input>
+                  displayFormat="MM/YYYY" pickerFormat="MM/YYYY" min="{{min_date}}" max="{{max_date}}" [(ngModel)]="vehicle.first_reg"></ion-datetime>
+ -->
+        <ion-datetime placeholder="{{ 'lbl_1st_reg' | translate }}*" formControlName="vehicle_first_reg"  
+          displayFormat="MM/YYYY" pickerFormat="MM/YYYY"  [(ngModel)]="vehicle.first_reg" readonly></ion-datetime>
+          
+      </ion-item>
+
+
+      <!-- <ion-datetime id="date-time-{{booking_item.sr_no+1}}" min="{{min_date}}" max="{{max_date}}" (ionChange)="dateDisable(booking_item.sr_no+1)" 
+       display-format="MM/D/YYYY h:mm A"  picker-format="MM/D/YYYY h:mm A"   
+       value="{{booking_item.date_time}}"><span>temp</span></ion-datetime> -->
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_first_reg">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_first_reg').hasError(validation.type) && (Step1Form.get('vehicle_first_reg').dirty || Step1Form.get('vehicle_first_reg').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_kilometers' | translate }}*</ion-label>
+        <ion-input type="number"    [(ngModel)]="vehicle.kilometers" formControlName="vehicle_kilometers" (keyup)="changeto()"  ></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_kilometers">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_kilometers').hasError(validation.type) && (Step1Form.get('vehicle_kilometers').dirty || Step1Form.get('vehicle_kilometers').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_exterior_color' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.exterior_color" formControlName="vehicle_exterior_color">
+          <ion-option value="Anthracite">{{ 'lbl_anthracite' | translate }}</ion-option>
+          <ion-option value="Beige">{{ 'lbl_beige' | translate }}</ion-option>
+          <ion-option value="Black">{{ 'lbl_black' | translate }}</ion-option>
+          <ion-option value="Blue">{{ 'lbl_blue' | translate }}</ion-option>
+          <ion-option value="Bordeaux">{{ 'lbl_bordeaux' | translate }}</ion-option>
+          <ion-option value="Brown">{{ 'lbl_brown' | translate }}</ion-option>
+          <ion-option value="Gold">{{ 'lbl_gold' | translate }}</ion-option>
+          <ion-option value="Green">{{ 'lbl_green' | translate }}</ion-option>
+          <ion-option value="Grey">{{ 'lbl_grey' | translate }}</ion-option>
+          <ion-option value="Orange">{{ 'lbl_orange' | translate }}</ion-option>
+          <ion-option value="Other">{{ 'lbl_exterior_color_others' | translate }}</ion-option>
+          <ion-option value="Pink">{{ 'lbl_pink' | translate }}</ion-option>
+          <ion-option value="Red">{{ 'lbl_red' | translate }}</ion-option>
+          <ion-option value="Silver">{{ 'lbl_silver' | translate }}</ion-option>
+          <ion-option value="Turquoise">{{ 'lbl_turquoise' | translate }}</ion-option>
+          <ion-option value="Violet">{{ 'lbl_violet' | translate }}</ion-option>
+          <ion-option value="White">{{ 'lbl_White' | translate }}</ion-option>
+          <ion-option value="Yellow">{{ 'lbl_yellow' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_exterior_color">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_exterior_color').hasError(validation.type) && (Step1Form.get('vehicle_exterior_color').dirty || Step1Form.get('vehicle_exterior_color').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_car_finish' | translate }}</ion-label>
+        <ion-select [(ngModel)]="vehicle.car_finish" formControlName="vehicle_car_finish">
+          <ion-option value="Bubble effect">{{ 'lbl_bubble_effect' | translate }}</ion-option>
+          <ion-option value="Individual paint">{{ 'lbl_individual_paint' | translate }}</ion-option>
+          <ion-option value="Matt paint">{{ 'lbl_matt_paint' | translate }}</ion-option>
+          <ion-option value="Mettalic">{{ 'lbl_mettalic' | translate }}</ion-option>
+          <ion-option value="Solid paint">{{ 'lbl_solid_paint' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_interior_color' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.interior_color" formControlName="vehicle_interior_color">
+          <ion-option value="Anthracite">{{ 'lbl_anthracite' | translate }}</ion-option>
+          <ion-option value="Beige">{{ 'lbl_beige' | translate }}</ion-option>
+          <ion-option value="Black">{{ 'lbl_black' | translate }}</ion-option>
+          <ion-option value="Blue">{{ 'lbl_blue' | translate }}</ion-option>
+          <ion-option value="Bordeaux">{{ 'lbl_bordeaux' | translate }}</ion-option>
+          <ion-option value="Brown">{{ 'lbl_brown' | translate }}</ion-option>
+          <ion-option value="Gold">{{ 'lbl_gold' | translate }}</ion-option>
+          <ion-option value="Green">{{ 'lbl_green' | translate }}</ion-option>
+          <ion-option value="Grey">{{ 'lbl_grey' | translate }}</ion-option>
+          <ion-option value="Orange">{{ 'lbl_orange' | translate }}</ion-option>
+          <ion-option value="Other">{{ 'lbl_other' | translate }}</ion-option>
+          <ion-option value="Pink">{{ 'lbl_pink' | translate }}</ion-option>
+          <ion-option value="Red">{{ 'lbl_red' | translate }}</ion-option>
+          <ion-option value="Silver">{{ 'lbl_silver' | translate }}</ion-option>
+          <ion-option value="Turquoise">{{ 'lbl_turquoise' | translate }}</ion-option>
+          <ion-option value="Violet">{{ 'lbl_violet' | translate }}</ion-option>
+          <ion-option value="White">{{ 'lbl_White' | translate }}</ion-option>
+          <ion-option value="Yellow">{{ 'lbl_yellow' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_interior_color">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_interior_color').hasError(validation.type) && (Step1Form.get('vehicle_interior_color').dirty || Step1Form.get('vehicle_interior_color').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_options_additional_information' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.additional_info" formControlName="vehicle_additional_info"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_gen_condition' | translate }}</ion-label>
+        <ion-select [(ngModel)]="vehicle.gen_condition" multiple="true" formControlName="vehicle_gen_condition">
+          <ion-option>{{ 'lbl_vehicle_involved_in_accident' | translate }}</ion-option>
+          <ion-option>{{ 'lbl_dog_owner' | translate }}</ion-option>
+          <ion-option>{{ 'lbl_smokers_vehicle' | translate }}</ion-option>
+          <ion-option>{{ 'lbl_hail_damage' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_vehicle_inspection_date' | translate }}</ion-label>
+        <!-- <ion-input type="text" [(ngModel)]="vehicle.inspection" formControlName="vehicle_inspection"></ion-input> -->
+        <ion-datetime placeholder="{{ 'lbl_vehicle_inspection_date' | translate }}" formControlName="vehicle_inspection"
+          displayFormat="MM/YYYY" pickerFormat="MM/YYYY" [(ngModel)]="vehicle.inspection"></ion-datetime>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-label stacked>{{ 'lbl_other' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.other_condition_eng" formControlName="vehicle_other_condition_eng"  (ionChange)="hideShowDamage()">
+        </ion-textarea>
+      </ion-item> -->
+
+      <ion-item >
+        <ion-label stacked>{{ 'lbl_other' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.other_condition_eng" formControlName="vehicle_other_condition_eng"   ></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="hideDamages">
+        <a (click)="switchBodyMultiLings(bodyMultiLinguals)">Multilingual</a>
+      </ion-item>
+      <ion-item *ngIf="hideDamages && !bodyMultiLinguals">
+        <ion-label stacked>{{ 'lbl_body_deu' | translate }}</ion-label>
+        <!-- <ion-textarea [(ngModel)]="vehicle.other_body_deu" formControlName="vehicle_other_body_deu"></ion-textarea> -->
+       <ion-textarea  formControlName="vehicle_other_body_deu"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="hideDamages && !bodyMultiLinguals">
+        <ion-label stacked>{{ 'lbl_body_it' | translate }}</ion-label>
+        <!-- <ion-textarea [(ngModel)]="vehicle.other_body_it" formControlName="vehicle_other_body_it"></ion-textarea> -->
+
+        <ion-textarea formControlName="vehicle_other_body_it"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="hideDamages && !bodyMultiLinguals">
+        <ion-label stacked>{{ 'lbl_body_fr' | translate }}</ion-label>
+        <!-- <ion-textarea [(ngModel)]="vehicle.other_body_fr" formControlName="vehicle_other_body_fr"></ion-textarea> -->
+       <ion-textarea  formControlName="vehicle_other_body_fr"></ion-textarea>
+      </ion-item>
+      
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_frame_no' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="vehicle.frame_no" formControlName="vehicle_frame_no"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_model_no_required' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="vehicle.model_no" formControlName="vehicle_model_no" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!--<ion-label stacked>{{ 'lbl_register_no' | translate }}</ion-label>-->
+        <ion-label stacked>{{ 'lbl_register_number' | translate }}</ion-label>
+        <ion-input type="text" [(ngModel)]="vehicle.reg_no" formControlName="vehicle_reg_no"></ion-input>
+      </ion-item>
+      <ion-item>
+        <!--<ion-label stacked>{{ 'lbl_vehicle_no' | translate }}</ion-label>-->
+        <ion-label stacked>{{ 'lbl_vehicle_number' | translate }}</ion-label>        
+        <ion-input type="text" [(ngModel)]="vehicle.vehicle_no" formControlName="vehicle_vehicle_no"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_swiss_car' | translate }}</ion-label>
+        <ion-toggle  formControlName="vehicle_swiss_car"  ></ion-toggle>
+      </ion-item>
+
+      <!-- [(ngModel)]="vehicle.swiss_car" [checked]="true" -->
+
+     
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_vehicle_region' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.vehicle_regions" formControlName="vehicle_vehicle_regions">
+
+          <!-- <ion-option *ngFor="let regin of reginList" value="{{regin.id}}" >{{regin.region_name}}</ion-option> -->
+          <ion-option *ngFor="let regin of reginList" value="{{regin.region_code}}" >{{regin.region_name | translate}}</ion-option>
+          <!-- <ion-option value="ZH">Zurich</ion-option> -->
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_vehicle_regions">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_vehicle_regions').hasError(validation.type) && (Step1Form.get('vehicle_vehicle_regions').dirty || Step1Form.get('vehicle_vehicle_regions').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- <ion-item>
+        <ion-label stacked>{{ 'lbl_vehicle_registration_document' | translate }}</ion-label>
+        <ion-select [(ngModel)]="vehicle.reg_document" formControlName="vehicle_reg_document">
+          <ion-option value="1">{{ 'lbl_available' | translate }}</ion-option>
+          <ion-option value="2">{{ 'lbl_will_be_supplied_later' | translate }}</ion-option>
+        </ion-select>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_service_record' | translate }}</ion-label>
+        <ion-select [(ngModel)]="vehicle.service_record" formControlName="vehicle_service_record">
+          <ion-option value="1">{{ 'lbl_available' | translate }}</ion-option>
+          <ion-option value="2">{{ 'lbl_incomplete' | translate }}</ion-option>
+          <ion-option value="3">{{ 'lbl_missing' | translate }}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_number_of_keys' | translate }}*</ion-label>
+        <ion-select [(ngModel)]="vehicle.no_of_keys" formControlName="vehicle_no_of_keys">
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option> 
+          <!-- <ion-option value="5">5</ion-option>
+          <ion-option value="6">6</ion-option>
+          <ion-option value="7">7</ion-option>
+          <ion-option value="8">8</ion-option>
+          <ion-option value="9">9</ion-option> -->
+        </ion-select>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_no_of_keys">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_no_of_keys').hasError(validation.type) && (Step1Form.get('vehicle_no_of_keys').dirty || Step1Form.get('vehicle_no_of_keys').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+
+      <h5>{{ 'lbl_vehicle_damage_information' | translate }}</h5>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_vehicle_damage' | translate }}</ion-label>
+        <ion-toggle [(ngModel)]="vehicle.is_damage" formControlName="vehicle_is_damage" (ionChange)="hideShowDamage()">
+        </ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage">
+        <ion-label stacked>{{ 'lbl_body' | translate }}</ion-label>
+        <ion-textarea  formControlName="vehicle_body_eng"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage">
+        <a (click)="switchBodyMultiLing(bodyMultiLingual)">Multilingual</a>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage && !bodyMultiLingual">
+        <ion-label stacked>{{ 'lbl_bodys_deu' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.body_deu" formControlName="vehicle_body_deu"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage && !bodyMultiLingual">
+        <ion-label stacked>{{ 'lbl_bodys_it' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.body_it" formControlName="vehicle_body_it"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage && !bodyMultiLingual">
+        <ion-label stacked>{{ 'lbl_bodys_fr' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.body_fr" formControlName="vehicle_body_fr"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage">
+        <ion-label stacked>{{ 'lbl_repairs' | translate }}</ion-label>
+        <ion-input type="number" placeholder="CHF" [(ngModel)]="vehicle.repairs" formControlName="vehicle_repairs" required="false"></ion-input>
+      </ion-item>
+
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.vehicle_repairs">
+          <div class="error-message"
+            *ngIf="Step1Form.get('vehicle_repairs').hasError(validation.type) && (Step1Form.get('vehicle_repairs').dirty || Step1Form.get('vehicle_repairs').touched) ">
+            {{ validation.message }} 
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item *ngIf="!hideDamage">
+        <ion-label stacked>{{ 'lbl_mechanics' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.mechanics_eng" formControlName="vehicle_mechanics_eng"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage">
+        <a (click)="switchMechanicsMultiLing(mechanicsMultiLingual)">Multilingual</a>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage && !mechanicsMultiLingual">
+        <ion-label stacked>{{ 'lbl_mechanics_german' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.mechanics_deu" formControlName="vehicle_mechanics_deu"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage && !mechanicsMultiLingual">
+        <ion-label stacked>{{ 'lbl_mechanics_italy' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.mechanics_it" formControlName="vehicle_mechanics_it"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!hideDamage && !mechanicsMultiLingual">
+        <ion-label stacked>{{ 'lbl_mechanics_french' | translate }}</ion-label>
+        <ion-textarea [(ngModel)]="vehicle.mechanics_fr" formControlName="vehicle_mechanics_fr"></ion-textarea>
+      </ion-item>
+      
+
+    </ion-list>
+
+    <h6 *ngIf="!hideDamage">{{ 'lbl_vehicle_damage_images' | translate }}</h6>
+    <div *ngIf="!hideDamage" class="vehicle-images">
+      <ion-card class="col col-3 card">
+        <ion-icon *ngIf="vehicleDamage.bottomsideId > 0" name="trash" class="deleteIcon"
+          (click)="deleteDamagePhoto(vehicleDamage.bottomsideId, 'bottomside')"></ion-icon>
+        <img (click)="presentActionSheet('bottomside')" [src]="vehicleDamage.bottomside" />
+      </ion-card>
+      <ion-card class="col col-3 card">
+        <ion-icon *ngIf="vehicleDamage.leftsideId > 0" class="deleteIcon" name="trash"
+          (click)="deleteDamagePhoto(vehicleDamage.leftsideId, 'leftside')"></ion-icon>
+        <img (click)="presentActionSheet('leftside')" [src]="vehicleDamage.leftside" />
+      </ion-card>
+      <ion-card class="col col-3 card">
+        <ion-icon *ngIf="vehicleDamage.rightsideId > 0" name="trash" class="deleteIcon"
+          (click)="deleteDamagePhoto(vehicleDamage.rightsideId, 'rightside')"></ion-icon>
+        <img (click)="presentActionSheet('rightside')" [src]="vehicleDamage.rightside" />
+      </ion-card>
+      <ion-card class="col col-3 card">
+        <ion-icon *ngIf="vehicleDamage.topsideId > 0" name="trash" class="deleteIcon"
+          (click)="deleteDamagePhoto(vehicleDamage.topsideId, 'topside')"></ion-icon>
+        <img (click)="presentActionSheet('topside')" [src]="vehicleDamage.topside" />
+      </ion-card>
+      <ion-card class="col col-3 card">
+        <ion-icon *ngIf="vehicleDamage.backsideId > 0" name="trash" class="deleteIcon"
+          (click)="deleteDamagePhoto(vehicleDamage.backsideId, 'backside')"></ion-icon>
+        <img (click)="presentActionSheet('backside')" [src]="vehicleDamage.backside" />
+      </ion-card>
+      <div class="clearfix"></div>
+    </div>
+
+    <ion-row>
+      <ion-col col-6>
+        <div class="next-button">
+          <button style="font-size: 12px;" ion-button block class="redbutton" [disabled]="!Step1Form.valid || vehicle.no_of_keys ==' ' || (!hideDamage && vehicle.repairs == ' ')"
+            (click)="next(0)">{{ 'lbl_add_to_garage' | translate }}</button>
+        </div>
+      </ion-col>
+      <ion-col col-6>
+        <div class="next-button">
+          <button style="font-size: 12px;" ion-button block class="redbutton" [disabled]="!Step1Form.valid || vehicle.no_of_keys ==' ' || (!hideDamage && vehicle.repairs == ' ')"
+            (click)="next(1)">{{ 'lbl_next' | translate }}</button>
+        </div>
+      </ion-col>
+    </ion-row>
+    
+  </form>
+</ion-content>

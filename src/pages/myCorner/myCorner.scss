@@ -1,0 +1,20 @@
+page-mycorner{
+    ion-list-header{
+        background: #efefef !important;
+        color: red !important;
+    }
+    .noBorder .item-inner{
+        border-bottom: none !important;
+    }
+
+
+    .hide {
+        display: none;
+     }
+     .show {
+        display: block;
+     }
+}
+
+
+

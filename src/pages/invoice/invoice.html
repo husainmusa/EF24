@@ -1,0 +1,32 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>Invoices</ion-title>
+  </ion-navbar>
+</ion-header> -->
+<ion-header>
+  <shared-header [title]="'lbl_my_invoices'"></shared-header>
+</ion-header>
+<ion-content >
+  <ion-card *ngIf="invoiceData.length">
+    <ion-item *ngFor="let invoice of invoiceData">
+
+      <div class="download-button " *ngIf="invoice.Vehicle">
+        <!-- <button ion-button icon-start (click)="download(invoice.Vehicle.invoice_name, invoice.Vehicle.invoice_url);"> -->
+          <i class="fa fa-arrow-circle-down fa_custom fa-2x " (click)="download(invoice.Vehicle.invoice_name, invoice.Vehicle.invoice_url);"  ></i>
+        <!-- </button> -->
+      </div>
+      <div class="invoice-content" *ngIf="invoice.Vehicle">
+        <h3><b>{{invoice.Vehicle.brand}} {{invoice.Vehicle.model}}</b></h3>
+        <h2 class="invoice-title">{{ 'lbl_invoice' | translate }} #{{invoice.Vehicle.id}}</h2>
+      </div>
+      <div class="invoice-total" item-right *ngIf="invoice.Vehicle">
+        CHF {{invoice.Vehicle.buy_price}}
+      </div>
+    </ion-item>
+  </ion-card>
+  <div *ngIf="invoiceData && invoiceData.length < 1">
+    <ion-item style="text-align:center;">
+      {{'lbl_no_result_found' | translate}}
+    </ion-item>
+  </div>
+</ion-content>

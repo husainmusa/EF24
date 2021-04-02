@@ -1,0 +1,117 @@
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>Documents & Pictures</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+<ion-header>
+  <shared-header [title]="'lbl_documents_pictures'"></shared-header>
+</ion-header>
+
+<ion-content padding class="page-step-two">
+  <!-- <div [formGroup]="StepTwoForm"> -->
+
+
+  <ion-row>
+    <ion-col>
+      <h4>{{ 'lbl_fahrzeugbilder' | translate }}</h4>
+      <p>{{ 'lbl_sie_konnen_maximal' | translate }}</p>
+    </ion-col>
+  </ion-row>
+
+  <!-- <div class="vehicle-images">
+    <ion-card class="col col-3 card" *ngFor="let photo of photos; let id = index">
+      <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+      <img [src]="photo" (click)="presentActionSheet(id)" />
+    </ion-card>
+    <div class="clearfix"></div>
+  </div> -->
+
+  <!--<button ion-button block  (click)="askCameraOption('VEHICLE', 1,123)">TEST</button>-->
+
+  <div class="vehicle-images">
+    <ion-card class="col col-3 card" *ngFor="let photo of photos; let id = index">
+      <!-- <ion-icon name="trash" *ngIf="(photo.id != null)" class="deleteIcon" (click)="deleteVehicleImage(photo.id, id)">
+      </ion-icon> -->
+      <ion-icon name="trash" *ngIf="photo.type == 1 " class="deleteIcon" (click)="deleteVehicleImage(photo.id, id)">
+      </ion-icon>
+      <img [src]="photo.imageUrl" (click)="presentActionSheet(id, photo.id)" />
+    </ion-card>
+    <div class="clearfix"></div>
+  </div>
+
+  <ion-row class="vehicle_document">
+    <ion-col>
+      <h3>{{ 'lbl_dokumente_und_bilder' | translate }}</h3>
+      <h4>{{ 'lbl_fahrzeugdokument' | translate }}</h4>
+
+
+      <div class="comertialArea" >
+
+        <ion-row radio-group >
+          <!-- <ion-col col-6 class="leftContainer" >
+           
+            <p >{{'lbl_Commercial_Register' | translate }}</p>
+          </ion-col> -->
+  
+        
+          <ion-col col-9 class="leftContainer" >
+            <ion-row class="leftContainerGroup" >
+              <ion-col col-10 class="leftClItem"  >
+                <ion-item no-lines class="customRadio" >
+                  <ion-radio value="orderBy1" (click)="selected('orderBy1')" checked="true"></ion-radio>
+                  <ion-label>{{ 'lbl_available' | translate  }} </ion-label>
+              
+                </ion-item>
+  
+              </ion-col>
+              <ion-col col-10 class="leftClItem" >
+  
+                <ion-item no-lines class="customRadio" >
+                  <ion-label>{{ 'lbl_will_be_supplied_later' | translate  }}</ion-label>
+                  <ion-radio value="orderBy2" (click)="selected('orderBy2')"></ion-radio>
+                </ion-item>
+  
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+
+      </div>
+
+      <!-- <ion-select  >
+        <ion-option value="1">{{ 'lbl_available' | translate }}</ion-option>
+        <ion-option value="2">{{ 'lbl_will_be_supplied_later' | translate }}</ion-option>
+      </ion-select> -->
+
+      <!-- <p>{{ 'lbl_sie_konnen_beliebige' | translate }} </p> -->
+    </ion-col>
+  </ion-row>
+
+  <div>
+
+    <ion-col [ngClass]="{ 'show' : showCards, 'hide': !showCards }">
+      <p>{{ 'lbl_sie_konnen_beliebige' | translate }}</p>
+     
+  
+      </ion-col>
+  </div>
+ 
+
+
+
+  <div class="vehicle-images" [ngClass]="{ 'show' : showCards, 'hide': !showCards }">
+    <ion-card class="col col-3 card" *ngFor="let doc of docs; let id = index">
+      <ion-icon name="trash" *ngIf="(doc.id != null)" class="deleteIcon" (click)="deleteVehicleDoc(doc.id, id)">
+      </ion-icon>
+      <img [src]="doc.imageUrl" (click)="presentActionSheetDoc(id, doc.id)" />
+    </ion-card>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="next-button">
+    <button ion-button block class="redbutton" (click)="next()">{{ 'lbl_next' | translate }}</button>
+  </div>
+
+</ion-content>

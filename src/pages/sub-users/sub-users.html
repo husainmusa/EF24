@@ -1,0 +1,40 @@
+<ion-header>
+  <shared-header [title]="'lbl_sub_users'"></shared-header>
+</ion-header>
+<ion-content>
+
+
+  <!-- <ion-row>
+    <ion-col col-12 >
+      <ion-buttons end>
+        <button ion-button color="primary" (click)="addSubUser()" class="add-action-button"><ion-icon name="add"></ion-icon></button>
+      </ion-buttons>
+    </ion-col>
+  </ion-row> -->
+
+ <ion-card *ngFor="let subUser of subUsers">
+   <ion-grid>
+    <ion-row justify-content-center align-items-center >
+      <ion-col col-8>
+        <ion-label left>{{subUser.User.fname}} {{subUser.User.lname}}</ion-label>
+      </ion-col>
+      <ion-col col-4>
+        <ion-buttons end>
+          <button right ion-button class="action-buttons" (click)="editSubUser(subUser.User.id)" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <button right ion-button class="action-buttons" (click)="deleteSubUser(subUser.User.id)" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+   </ion-grid>
+ </ion-card>
+
+
+
+</ion-content>
+
+<ion-footer no-border>
+ 
+   <ion-buttons end>
+    <button ion-button color="primary" (click)="addSubUser()" class="add-action-button"><ion-icon name="add"></ion-icon></button>
+  </ion-buttons>
+</ion-footer>

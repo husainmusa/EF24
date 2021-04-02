@@ -1,0 +1,228 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ vehicle?.Vehicle.brand }} {{ vehicle?.Vehicle.model }} {{ vehicle?.Vehicle.type }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!-- <shared-header [language]="'en'" [title]="'lbl_auction'" ></shared-header> -->
+
+<ion-content padding > 
+  <ion-card-content>
+  <ion-slides class="imageSlider" autoplay="5000" loop="true" speed="500" class="slides" pager="true"  >
+    <ion-slide *ngFor="let image of vehicle?.VehicleDoc;"  >
+      <img style="width:100%;" src="{{baseUrl}}img/vehicle/orignal/{{image.file_name}}" />
+    </ion-slide>
+  </ion-slides>
+
+</ion-card-content>
+
+  <div>
+    <ion-row>
+      <ion-col col-12 class="vehicle-title">
+        {{ vehicle?.Vehicle.brand }} {{ vehicle?.Vehicle.model }} {{ vehicle?.Vehicle.type }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-6>
+          {{ 'lbl_auction_price' | translate }}: CHF{{ vehicle?.Vehicle.min_auction_price }}
+      </ion-col>
+      <ion-col col-6>
+          {{ 'lbl_buy_Price' | translate }}: CHF{{ vehicle?.Vehicle.buy_price }}
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button full color="dark" (click)="activateVehicle()">Activate</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="separator">
+      <ion-col col-12>
+        <i class="fa fa-road" aria-hidden="true"></i> {{ vehicle?.Vehicle.kilometers }} Kms
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <i class="fa fa-calendar" aria-hidden="true"></i> {{ vehicle?.Vehicle.first_reg }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <i class="fa fa-tachometer" aria-hidden="true"></i> {{ vehicle?.Vehicle.kw }} kW {{ vehicle?.Vehicle.hp }} hp</ion-col>
+    </ion-row>
+
+
+    <ion-row class="separator">
+      <ion-col col-12>
+        <h6 class="vehicle-detail-title">
+          <strong>{{ 'lbl_vehicle_detials' | translate }}</strong>
+        </h6>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <p class="vehicle-detail-title">
+          <strong>{{ 'lbl_properties' | translate }}</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_type' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.type }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_body_type' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.body_type }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_door_count' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.doors }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_number_of_seats' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.no_of_seats }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_number_of_keys' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.no_of_keys }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_exterior_color' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.exterior_color }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_interior_color' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.interior_color }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <p class="vehicle-detail-title">
+          <strong>{{ 'lbl_drive' | translate }}</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_gear_type' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.gear }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_displacement' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.displacement }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_wheel_drive' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{ vehicle?.Vehicle.wheel_drive }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <p class="vehicle-detail-title">
+          <strong>{{ 'lbl_registration' | translate }}</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_register_number' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{vehicle?.Vehicle.reg_no}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_model_number' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{vehicle?.Vehicle.vehicle_no}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_frame_number' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{vehicle?.Vehicle.frame_no}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_swiss_car' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{vehicle?.Vehicle.swiss_car == 1 ? 'Yes' : 'No' }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+          {{ 'lbl_vehicle_region' | translate }}
+      </ion-col>
+      <ion-col col-7>
+        {{vehicle?.Vehicle.vehicle_regions}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="separator">
+        <ion-col col-12>
+          <h6 class="vehicle-detail-title">
+            <strong>{{ 'lbl_vehicle_description' | translate }}</strong>
+          </h6>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col col-12>
+            {{vehicle?.Vehicle.additional_info}}
+          </ion-col>
+        </ion-row>
+  </div>
+</ion-content>

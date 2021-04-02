@@ -1,0 +1,84 @@
+
+<ion-header>
+  <ion-navbar>
+    
+    <ion-title style="padding: 0 21px;">{{ 'lbl_add_advertisement' | translate}} </ion-title>
+  </ion-navbar>
+  </ion-header>
+  <ion-row>
+    <div style="margin-top: 58px; background-color: #F9F9F9; width: 100%; z-index: 999; padding: 0px 14px; font-size: 16px;">
+    <p>{{ 'lbl_header_advertisement' | translate}}</p>
+  </div>
+  </ion-row>
+    
+    
+  
+  <ion-content class="content-scroll">
+    <div class="scroll-content" style="margin-top: 2px;margin-bottom:58px;">
+          <ion-card *ngFor="let vehicleObj of vehiclesData" >
+        <ion-card-content>
+          <div style="display: flex;
+          align-items: center;
+          justify-content: center;" >
+            <span style="text-align: center; font-size: 16px;
+            font-weight: 600;" >{{vehicleObj.TypEn}}</span>
+          </div>
+          <ion-row>
+           <ion-col col-12>
+             <div class="d-flex">
+              <ion-col col-6>
+                <div class="d-flex">
+                <ion-col class="autoRow"> {{ 'lbl_seat_advertisement' | translate}}
+                </ion-col>
+                <ion-col class="text-left" >
+                 {{vehicleObj.Platze}}
+                </ion-col>
+              </div>
+
+              <div class="d-flex">
+                <ion-col class="autoRow"> {{ 'lbl_gear_advertisement' | translate}} 
+                </ion-col>
+                <ion-col class="text-left" >
+                  {{vehicleObj.Gange}}
+                </ion-col>
+              </div>
+
+              <div class="d-flex">
+                <ion-col class="autoRow"> {{ 'lbl_Fuel_advertisement' | translate}} 
+                </ion-col>
+                <ion-col class="text-left" >
+                  {{vehicleObj.Treibstoff}}
+                </ion-col>
+              </div>
+              </ion-col>
+
+              <ion-col col-6>
+                <div class="d-flex">
+                <ion-col class="autoRow"> {{ 'lbl_Performance_advertisement' | translate}} 
+                </ion-col>
+                <ion-col class="text-left" >
+                  {{vehicleObj.GesamtKW}}
+                </ion-col>
+              </div>
+
+              <button ion-button small class="btn-select" (click)="selectedCar(vehicleObj)" >{{ 'lbl_select' | translate}}</button>
+
+              </ion-col>
+
+              
+            </div>
+           </ion-col>
+         </ion-row>
+         
+        </ion-card-content>
+        
+      </ion-card>
+    </div>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar color="danger">
+      <button color="danger" style="text-transform: capitalize;" ion-button full (click)="closeModal()">{{ 'lbl_close' | translate }}</button>
+    </ion-toolbar>
+  </ion-footer>

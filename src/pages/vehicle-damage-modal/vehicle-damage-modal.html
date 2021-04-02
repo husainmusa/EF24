@@ -1,0 +1,16 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'lbl_vehicle_damage_preview' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <img src="{{baseUrl}}img/vehicledamage/orignal/{{imageUrl}}" />
+</ion-content>
+<ion-footer>
+    <ion-toolbar color="danger">
+        <button color="danger" ion-button full (click)="closeModal()">{{ 'lbl_close' | translate }}</button>
+    </ion-toolbar>
+  </ion-footer>

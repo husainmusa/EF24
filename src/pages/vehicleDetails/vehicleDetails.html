@@ -1,0 +1,561 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{vehicle.Vehicle.brand}} {{vehicle.Vehicle.model}} {{vehicle.Vehicle.type}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngIf="vehicleDoc.length !=0 " >
+    <ion-card-content>
+
+      <ion-slides  *ngIf="vehicleDoc" class="imageSlider" autoplay="5000" loop="true" speed="500" class="slides" pager="true"  >
+        <!-- Added extra div to check if image is present or not -->
+        <div  *ngFor="let image of vehicleDoc; let i = index">
+          <ion-slide *ngIf="image.file_name && image.file_name!='' ">
+            <img class="v_image" *ngIf="image.file_type == 2"  src="{{baseUrl}}img/vehicle/orignal/{{image.file_name}}" onerror="this.onerror=null;this.src='../../assets/images/no-image-available.png';"  />
+            <img class="v_image"  *ngIf="image.file_type == 1"   src="{{baseUrl}}files/doc/{{image.file_name}}" onerror="this.onerror=null;this.src='../../assets/images/no-image-available.png';" />
+            <!-- <img  *ngIf="image.file_type == 1" style="width:100%;"  src="assets/images/no-image-available.png" /> -->
+          </ion-slide>
+        </div>
+      </ion-slides>
+     
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="vehicle.VehicleDoc.length == 0 " >
+    <ion-card-content>
+      <img  class="vehicle-image img-thumbnail" src="assets/images/no-image-available.png" />
+    </ion-card-content>
+  </ion-card>
+
+ <div>
+    <!--<ion-row>
+      <ion-col col-12 class="vehicle-title">
+       <span style="color: #000;">{{vehicle.Vehicle.brand}}</span>  <br>
+       <span style="color: #EE1111;">{{vehicle.Vehicle.model}} {{vehicle.Vehicle.type}} {{vehicle.Vehicle.body_type}} ,{{vehicle.Vehicle.hp}} PS</span> 
+
+        
+       <i *ngIf="!isFavorite" class="fa fa-heart-o pull-right fa-1x " (click)="makeFavourite(1)"></i> 
+       <i *ngIf="isFavorite" class="fa fa-heart pull-right fa-1x" (click)="makeFavourite(0)"></i>
+      </ion-col>
+      
+    </ion-row>-->
+
+    <ion-row>
+      <ion-col col-12 class="vehicle-title flex-div">
+        <div>
+          <span style="color: #000;">{{vehicle.Vehicle.brand}}</span>  <br>
+          <span style="color: #EE1111;">{{vehicle.Vehicle.model}} {{vehicle.Vehicle.type}} {{vehicle.Vehicle.body_type}} ,{{vehicle.Vehicle.hp}} PS</span> 
+        </div>
+        <div *ngIf="actionType != 'vehicles_sold' ">
+          <i *ngIf="!isFavorite && actionType != 'lbl_my_purchased_cars' " class="fa fa-heart-o pull-right fa-1x " (click)="makeFavourite(1)"></i> 
+          <i *ngIf="isFavorite && actionType != 'lbl_my_purchased_cars'" class="fa fa-heart pull-right fa-1x" (click)="makeFavourite(0)"></i>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Code done by diviya -->
+    <div *ngIf="!vehicle.isOver">
+    <ion-row>
+      <ion-col [ngClass]="{ 'show' : showCards, 'hide': !showCards }" col-12 class="vehicle-title">
+        <!-- {{vehicle.Vehicle.model}}{{vehicle.Vehicle.type}} -->
+      <!-- <p text-wrap > </p>
+        <p text-wrap></p> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-6 [ngClass]="{ 'show' : showCards, 'hide': !showCards }" *ngIf="showMinPrice && vehicle.max_bid_price == null" >
+        {{ 'lbl_auction_price' | translate }}: CHF{{vehicle.Vehicle.min_auction_price}} 
+      </ion-col>
+      <ion-col col-6 [ngClass]="{ 'show' : showCards, 'hide': !showCards }" *ngIf="vehicle.max_bid_price != null" >
+        {{ 'lbl_auction_price' | translate }}: CHF{{vehicle.max_bid_price}}
+      </ion-col>
+       <!-- <ion-col col-6 *ngIf="vehicle.buy_price == 0.00">
+       </ion-col> (sellerId != vehicle.User.id)  ||  -->
+      <ion-col col-6 *ngIf="vehicle.Vehicle.buy_price !='0.-' && !showSoldPrice"  [ngClass]="{ 'show' : showCard, 'hide': !showCard }">
+       {{ 'lbl_buy_Price' | translate }}: CHF{{vehicle.Vehicle.buy_price}}
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col col-6 [ngClass]="{ 'show' : showCard, 'hide': !showCard }" *ngIf="actionType !== 'lbl_my_purchased_cars' && actionType !== 'vehicles_sold' ">
+        <button ion-button full color="danger" (click)="openBidModal();">{{ 'lbl_bid_now' | translate }}</button>
+      </ion-col>
+      <ion-col col-6   [ngClass]="{ 'show' : showCard, 'hide': !showCard }" *ngIf="(actionType !== 'lbl_my_purchased_cars')  && (actionType !== 'vehicles_sold') && (vehicle.Vehicle.buy_price !='0.-') ">
+        <strong><button ion-button full color="dark"
+            (click)="buyNowVehicle(vehicle);">{{ 'lbl_buy_now' | translate }}</button></strong>
+      </ion-col>
+     
+    </ion-row>
+
+    <ion-row  >
+      <ion-col col-6 [ngClass]="{ 'show' : showCardauc, 'hide': !showCardauc }" *ngIf="actionType !== 'lbl_my_purchased_cars' && actionType !== 'vehicles_sold' ">
+        <button ion-button full color="danger" (click)="start();">{{'lbl_start_auction' | translate}}</button>
+      </ion-col>
+      <ion-col col-6   [ngClass]="{ 'show' : showCardauc, 'hide': !showCardauc }" *ngIf="(actionType !== 'lbl_my_purchased_cars')  && (actionType !== 'vehicles_sold') ">
+        <strong><button ion-button full color="primary"
+            (click)="edit();">{{'lbl_edit' | translate}}</button></strong>
+      </ion-col>
+     
+    </ion-row>
+
+
+    <!-- <p>
+      <button ion-button (click)="next()" class="add-button">Start auction</button>
+      <button ion-button color="primary" (click)="edit()" class="add-action-button">Edit</button>
+    </p> -->
+
+    <ion-row>
+
+      <ion-col [ngClass]="{ 'show' : showCard, 'hide': !showCard }" *ngIf="(actionType !== 'lbl_my_purchased_cars')  && (actionType !== 'vehicles_sold') ">
+        <strong><button  ion-button full color="dark"  (click)="testCode();"> <b>{{'lbl_bid_with_increase' | translate}}</b></button></strong>
+      </ion-col>
+    </ion-row>
+
+    
+    
+    <ion-row  *ngIf="sellerId == vehicle.User?.id ">
+      <ion-col col-6 [ngClass]="{ 'show' : showCardauc, 'hide': !showCardauc }">
+        <strong><button ion-button full color="dark"
+            (click)="uploadImage();">{{ 'Upload Image' | translate }}</button></strong>
+      </ion-col>
+      <ion-col col-6 [ngClass]="{ 'show' : showCardauc, 'hide': !showCardauc }">
+        <button ion-button full color="danger" (click)="deleteVehicle();">{{ 'lbl_delete' | translate }}</button>
+      </ion-col>
+
+    </ion-row>
+
+    
+  </div>
+  <div *ngIf="showSoldPrice">
+    <ion-row class="separator">
+      <ion-col col-6>
+        {{ 'lbl_sold_price' | translate }}
+      </ion-col>
+      <ion-col col-6>
+        {{vehicle.Vehicle.sold_price}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        {{ 'lbl_buyer_name' | translate }}
+      </ion-col>
+      <ion-col col-6>
+        {{vehicle.Buyer.fname}}
+      </ion-col>
+    </ion-row>
+  </div>
+  <div *ngIf="actionType == 'lbl_my_purchased_cars'">
+    <ion-row class="separator">
+      <ion-col col-6>
+        {{ 'lbl_purchased_price' | translate }}
+      </ion-col>
+      <ion-col col-6>
+        {{vehicle.Vehicle.sold_price}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        {{ 'lbl_sellers_name' | translate }}
+      </ion-col>
+      <ion-col col-6>
+        {{vehicle.Buyer.fname}}
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+    <ion-row class="separator">
+      <ion-col col-12>
+        <i class="fa fa-road" aria-hidden="true"></i> {{vehicle.Vehicle.kilometers}} Kms
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <i class="fa fa-calendar" aria-hidden="true"></i> {{vehicle.Vehicle.first_reg}}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <i class="fa fa-tachometer" aria-hidden="true"></i> {{vehicle.Vehicle.kw}} kW {{vehicle.Vehicle.hp}} PS
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="separator">
+      <ion-col col-12>
+        <h6 class="vehicle-detail-title">
+          <strong>{{ 'lbl_vehicle_details' | translate }}</strong>
+        </h6>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <p class="vehicle-detail-title">
+          <strong>{{ 'lbl_properties' | translate }}</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_type' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.type !='null' " >
+         {{vehicle.Vehicle.type}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_body_type' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.body_type !='null' " >
+        {{vehicle.Vehicle.body_type}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_door_count' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.doors !='null' " >
+        {{vehicle.Vehicle.doors}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_number_of_seats' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.no_of_seats !='null' " >
+        {{vehicle.Vehicle.no_of_seats}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_number_of_keys' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.no_of_keys !='null' " >
+        {{vehicle.Vehicle.no_of_keys}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_exterior_color' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.exterior_color !='null' " >
+        {{vehicle.Vehicle.exterior_color}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_car_Finish' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.car_finish !='null' " >
+        {{vehicle.Vehicle.car_finish}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_interior_color' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.interior_color !='null' " >
+        {{vehicle.Vehicle.interior_color}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_vehicle_inspection_date' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.inspection !='null' "  >
+
+        {{vehicle.Vehicle.inspection}}
+
+        <!-- {{vehicle.Vehicle.inspection | date : "dd.MM.y" }} -->
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_vehicle_registration_document' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.reg_document == 1" >
+        {{ 'lbl_available' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.reg_document == 2" >
+        {{ 'lbl_will_be_supplied_later' | translate }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_service_record' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.service_record == 1" >
+        {{ 'lbl_available' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.service_record == 2" >
+        {{ 'lbl_incomplete' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.service_record == 3" >
+        {{ 'lbl_missing' | translate }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_gen_condition' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.gen_condition !='null' " >
+        <div>{{vehicle.Vehicle.gen_condition}}</div>
+        <!-- <div *ngFor="let item of vehicle.Vehicle.gen_condition.split(',');">
+            {{ item }},
+        </div> -->
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <p class="vehicle-detail-title">
+          <strong>{{ 'lbl_drive' | translate }}</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_gear_type' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.gear !='null' " >
+        {{vehicle.Vehicle.gear}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row> 
+      <ion-col col-5>
+        {{ 'lbl_fuel' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.fuel !='null' " >
+        {{vehicle.Vehicle.fuel}}
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_wheel_drive' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.wheel_drive !='null' " >
+        {{vehicle.Vehicle.wheel_drive}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <p class="vehicle-detail-title">
+          <strong>{{ 'lbl_registration' | translate }}</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_register_number' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.reg_no !='null' " >
+        {{vehicle.Vehicle.reg_no}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_vehicle_number' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.vehicle_no !='null' " >
+        {{vehicle.Vehicle.vehicle_no}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_model_number' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.model_no !='null' " >
+        {{vehicle.Vehicle.model_no}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_frame_number' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.frame_no !='null' " >
+        {{vehicle.Vehicle.frame_no}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_options_additional_information' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf=" vehicle.Vehicle.additional_info !='null' " >
+        {{vehicle.Vehicle.additional_info}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_swiss_car' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.swiss_car == 1">
+        {{'lbl_yes' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.swiss_car == 0">
+        {{'lbl_no' | translate }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-5>
+        {{ 'lbl_vehicle_region' | translate }}
+      </ion-col>
+      <ion-col col-7 *ngIf="vehicle.Vehicle.vehicle_regions !='null' " >
+        {{vehicle.Vehicle.vehicle_regions | translate}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="separator">
+      <ion-col col-12>
+        <h6 class="vehicle-detail-title">
+          <strong>{{ 'lbl_vehicle_description' | translate }}</strong>
+        </h6>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 *ngIf="vehicle.Vehicle.additional_info !='null' " >
+        {{vehicle.Vehicle.additional_info}}
+      </ion-col>
+    </ion-row>
+
+    <ion-grid *ngIf="vehicle.VehicleDamage">
+      <ion-row class="separator">
+        <ion-col col-12>
+          <h6 class="vehicle-detail-title">
+            <strong>{{ 'lbl_damage_vehicle' | translate }}</strong>
+          </h6>
+        </ion-col>
+        <ion-col class="damaged-vehicle" col-4 *ngFor="let image of vehicle.VehicleDamage">
+          <img  (click)="openModal(image.back_file_name)" *ngIf="image.back_file_name"
+            src="{{baseUrl}}img/vehicledamage/thumb/{{image.back_file_name}}" />
+          <img (click)="openModal(image.bottom_file_name)" *ngIf="image.bottom_file_name"
+            src="{{baseUrl}}img/vehicledamage/thumb/{{image.bottom_file_name}}" />
+          <img (click)="openModal(image.left_file_name)" *ngIf="image.left_file_name"
+            src="{{baseUrl}}img/vehicledamage/thumb/{{image.left_file_name}}" />
+          <img (click)="openModal(image.right_file_name)" *ngIf="image.right_file_name"
+            src="{{baseUrl}}img/vehicledamage/thumb/{{image.right_file_name}}" />
+          <img (click)="openModal(image.top_file_name)" *ngIf="image.top_file_name"
+            src="{{baseUrl}}img/vehicledamage/thumb/{{image.top_file_name}}" />
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          {{ 'lbl_mechanics' | translate }}
+        </ion-col>
+        <ion-col col-7 *ngIf="vehicle.Vehicle.mechanics_eng !='null' "  >
+          {{vehicle.Vehicle.mechanics_eng}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          {{ 'lbl_body' | translate }}
+        </ion-col>
+        <ion-col col-7 *ngIf="vehicle.Vehicle.body_eng !='null' " >
+          {{vehicle.Vehicle.body_eng}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          {{ 'lbl_repairs_na' | translate }} 
+        </ion-col>
+        <ion-col col-7 *ngIf="vehicle.Vehicle.repairs !='null' " >
+          {{vehicle.Vehicle.repairs}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-5>
+          {{ 'lbl_other' | translate }}
+        </ion-col>
+        <ion-col col-7 *ngIf="vehicle.Vehicle.other_condition_eng !='null' " >
+          {{vehicle.Vehicle.other_condition_eng}}
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+
+    <ion-row class="separator">
+      <ion-col col-12>
+        <h6 class="recent_offers">
+          <strong><b>{{ 'lbl_recent_offers' | translate }}</b></strong>
+        </h6>
+      </ion-col>
+    </ion-row>
+
+    <ion-card class="separator">
+      <ion-grid>
+        <ion-row   >
+          <ion-col col-4>
+            <ion-label ><b>{{'lbl_name' | translate}}</b></ion-label>
+          </ion-col>
+          <ion-col col-4>
+
+           <ion-label ><b>{{'lbl_bidding_price' | translate}}</b></ion-label>
+            <!-- <ion-buttons end>
+              <button right ion-button class="action-buttons" (click)="editSubUser(subUser.User.id)" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+              <button right ion-button class="action-buttons" (click)="deleteSubUser(subUser.User.id)" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </ion-buttons> -->
+          </ion-col>
+
+          <ion-col col-4>
+           <ion-label ><b>{{'lbl_created' | translate}}</b></ion-label>
+         </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card class="separator" *ngFor="let subUser of subUsers; let i = index">
+      <ion-grid>
+       <ion-row  >
+         <ion-col col-4>
+           <ion-label ><b>***********</b></ion-label>
+         </ion-col>
+         <ion-col col-4>
+
+          <ion-label ><b>{{subUser.biding_amount}} CHF</b></ion-label>
+           <!-- <ion-buttons end>
+             <button right ion-button class="action-buttons" (click)="editSubUser(subUser.User.id)" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+             <button right ion-button class="action-buttons" (click)="deleteSubUser(subUser.User.id)" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+           </ion-buttons> -->
+         </ion-col>
+
+         <ion-col col-4>
+          <ion-label ><b>{{subUser.created | slice:0:10}}</b></ion-label>
+        </ion-col>
+       </ion-row>
+      </ion-grid>
+    </ion-card>
+
+   
+  
+
+  </div>
+</ion-content>                    

@@ -1,0 +1,106 @@
+<!-- <ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle end>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{ 'lbl_search_options' | translate }}</ion-title>
+    </ion-navbar>
+</ion-header> -->
+<ion-header>
+    <shared-header [title]="'lbl_search_options'"></shared-header>
+</ion-header>
+
+<ion-content>
+    <!-- <ion-list radio-group [(ngModel)]="bodyType">
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/suv.png">
+            <ion-label>Suv</ion-label>
+            <ion-radio value="SUV"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/sedan.png">
+            <ion-label>Limousine</ion-label>
+            <ion-radio value="Limousine"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/hatchback.png">
+            <ion-label>Minivan</ion-label>
+            <ion-radio value="Minivan"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/pickup.png">
+            <ion-label>Pickup</ion-label>
+            <ion-radio value="Pickup"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/bus.png">
+            <ion-label>Bus</ion-label>
+            <ion-radio value="Bus"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/cabriolet.png">
+            <ion-label>Cabriolet</ion-label>
+            <ion-radio value="Cabrio"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/wagon.png">
+            <ion-label>Kombi</ion-label>
+            <ion-radio value="Kombi"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/small-cars.png">
+            <ion-label>Kleinwagen</ion-label>
+            <ion-radio value="Kleinwagen"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/coupe.png">
+            <ion-label>Coupe</ion-label>
+            <ion-radio value="Coupe"></ion-radio>
+        </ion-item>
+    </ion-list> -->
+    <ion-list radio-group [(ngModel)]="bodyType">
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/bus.png">
+            <ion-label>{{'lbl_v_1' | translate}}</ion-label>
+            <ion-radio value="Limousine"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/wagon.png">
+            <ion-label>{{'lbl_v_2' | translate}}</ion-label>
+            <ion-radio value="Station wagon"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/suv.png">
+            <ion-label>{{'lbl_v_3' | translate}}</ion-label>
+            <ion-radio value="Off-road vehicle/SUV"></ion-radio>
+        </ion-item>
+        <ion-item>
+            <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/cabriolet.png">
+            <ion-label>{{'lbl_v_4' | translate}}</ion-label>
+            <ion-radio value="Sports car"></ion-radio>
+        </ion-item>
+    
+    <ion-item>
+        <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/coupe.png">
+        <ion-label>{{'lbl_v_5' | translate}}</ion-label>
+        <ion-radio value="Coupe"></ion-radio>
+    </ion-item>
+    <ion-item>
+        <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/hatchback.png">
+        <ion-label>{{'lbl_v_6' | translate}}</ion-label>
+        <ion-radio value="Large capacity/van"></ion-radio>
+    </ion-item>
+    <ion-item>
+        <img item-left class="vehicle-categories" src="assets/images/vehicle-categories/pickup.png">
+        <ion-label>{{'lbl_v_7' | translate}}</ion-label>
+        <ion-radio value="Pick up"></ion-radio>
+    </ion-item>
+</ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button full class="redbutton" (click)="search()">
+            {{ 'lbl_search' | translate }}
+        </button>
+    </ion-toolbar>
+</ion-footer>

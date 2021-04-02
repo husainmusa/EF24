@@ -1,0 +1,70 @@
+
+
+<ion-header>
+    <shared-header [title]="'lbl_search_options'"></shared-header>
+</ion-header>
+
+<ion-content>
+
+    <ion-list class="noMargin">
+
+        <ion-item>
+
+            <ion-label stacked>{{ 'lbl_search_sel_brand' | translate }}</ion-label>
+            <ion-select (click)="onSelectClicked()" [disabled]="!brandList.length" [(ngModel)]="make" id="makeId" (ngModelChange)="getModels($event)">
+                <ion-option value="">{{ 'lbl_search_sel_brand' | translate }}</ion-option>
+                <ion-option *ngFor="let brand of brandList" value="{{brand.MarkenNr}}" >{{brand.Marke}}</ion-option>            
+            </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+
+            <ion-label stacked>{{ 'lbl_search_sel_model' | translate }}</ion-label>
+            <ion-select (click)="onSelectClicked()" [(ngModel)]="model" (ngModelChange)="getYears($event)" [disabled]="!models.length" *ngIf="models.length">
+                <ion-option value="">{{ 'lbl_search_sel_model' | translate }}</ion-option>
+                <ion-option *ngFor="let model of models" value="{{model.ModGrpKey}}" >{{model.ModBezEn}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>{{ 'lbl_select_region' | translate }}</ion-label>
+            <ion-select (click)="onSelectClicked()" [(ngModel)]="selectedRegion" [disabled]="!reginList.length">
+                <ion-option value="">{{ 'lbl_select_region' | translate }}</ion-option>
+                <ion-option *ngFor="let regin of reginList" value="{{regin.region_code}}" >{{regin.region_name | translate}}</ion-option>
+
+                
+                <!-- <ion-option *ngFor="let item of regions"  value="{{item.value}}" selected="{{item.checked}}">
+                    {{item.text}}</ion-option> -->
+            </ion-select>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label stacked>{{ 'lbl_min_year' | translate }}</ion-label>
+
+            <ion-select [(ngModel)]="minYear" [disabled]="!min_years.length" (click)="onSelectClicked()">
+                <ion-option value="">{{ 'lbl_min_year' | translate }}</ion-option>
+                <ion-option *ngFor="let min_year of min_years" value="{{min_year}}" >{{min_year}}</ion-option>
+            </ion-select>
+
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>{{ 'lbl_max_year' | translate }}</ion-label>
+
+            <ion-select [(ngModel)]="maxYear" [disabled]="!min_years.length" (click)="onSelectClicked()">
+                <ion-option value="">{{ 'lbl_max_year' | translate }}</ion-option>
+                <ion-option *ngFor="let max_year of min_years" value="{{max_year}}" >{{max_year}}</ion-option>
+            </ion-select>
+
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button full class="redbutton" (click)="search()">
+            {{ 'lbl_search' | translate }}
+        </button>
+    </ion-toolbar>
+</ion-footer>

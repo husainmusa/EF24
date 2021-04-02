@@ -1,0 +1,127 @@
+<ion-header no-border >
+  <ion-toolbar  >
+    <shared-header [title]="'lbl_add_advertisement'"></shared-header>
+  </ion-toolbar>
+  
+</ion-header>
+<ion-content padding >
+
+  <form [formGroup]="autoApiForm" class="list-form" >
+
+    <ng-container *ngIf="FormError.__UNKNOWN__">
+      <div class="error-message">{{ FormError.__UNKNOWN__ }}</div>
+    </ng-container>
+
+    <ion-list class="registrationForm" style="margin-top: 40px !important;" >
+      
+    <ion-item>
+      <ion-label stacked>{{ 'lbl_model_number' | translate }}*</ion-label>
+      <!-- <ion-select formControlName="vehicle_brand_list" required (ionChange)="getmodel($event)" >
+        <ion-option *ngFor="let brand of brandList" value="{{brand.MarkenNr}}" >{{brand.Marke}}</ion-option>
+      </ion-select> -->
+      <ion-input type="text" [(ngModel)]="cretificate" formControlName="vehicle_brand_list"></ion-input>
+      
+    </ion-item>
+    <small *ngIf="FormError.incorrect_certificate" class="error-message">{{ FormError.incorrect_certificate }}</small>
+
+    <ion-item>
+      <ion-label stacked>{{ 'lbl_1st_reg' | translate }}*</ion-label>
+      <ion-datetime placeholder="" formControlName="vehicle_model_list"  
+          displayFormat="MM/YYYY" pickerFormat="MM/YYYY" [(ngModel)]="first_reg"></ion-datetime>         
+    </ion-item>
+    <small *ngIf="FormError.incorrect_registration" class="error-message">{{ FormError.incorrect_registration }}</small>
+
+  </ion-list>
+
+    
+
+    <div style="padding:0 10px;">
+      <button ion-button block class="redbutton" [disabled]="!autoApiForm.valid" (click)="getModelsList()"> {{ 'lbl_search' | translate }} </button>
+    </div>
+
+  </form>
+
+
+
+
+
+  <!-- <ion-list>
+      <ion-item style="border-top:none;">
+        <ion-label stacked>{{ 'lbl_first_reg' | translate }}</ion-label>
+        <ion-datetime formControlName="first_registration"
+          displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="first_registration"></ion-datetime>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.first_registration">
+          <div class="error-message"
+            *ngIf="AddAdvertisementSearchForm.get('first_registration').hasError(validation.type) && (AddAdvertisementSearchForm.get('first_registration').dirty || AddAdvertisementSearchForm.get('first_registration').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_model_no' | translate }}</ion-label>
+        <ion-input type="text" formControlName="model_number" [(ngModel)]="model_number"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.model_number">
+          <div class="error-message"
+            *ngIf="AddAdvertisementSearchForm.get('model_number').hasError(validation.type) && (AddAdvertisementSearchForm.get('model_number').dirty || AddAdvertisementSearchForm.get('model_number').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+
+    </ion-list> -->
+
+
+  
+
+
+
+  <!-- <div [formGroup]="AddAdvertisementDurationForm">
+    <div style="padding:20px">
+      {{ 'lbl_search_vehicle_productoin' | translate }}
+    </div>
+
+    <ion-list class="noMargin">
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_select_year' | translate }}</ion-label>
+        <ion-datetime displayFormat="YYYY" pickerFormat="YYYY" min="{{minYear}}" formControlName="year" [(ngModel)]="year" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_select_month' | translate }}</ion-label>
+        <ion-datetime displayFormat="MMMM" pickerFormat="MMMM" formControlName="month" [(ngModel)]="month" (ionChange)="searchMake($event)" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_search_make' | translate }}</ion-label>
+        <ion-select  formControlName="make" [ngModel]="make" (ionChange)="makeSelected($event)" >
+          <ion-option *ngFor="let makeData of makes" [value]="makeData.key">{{makeData.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_search_model' | translate }}</ion-label>
+        <ion-select  formControlName="model" [ngModel]="model" (ionChange)="modelSelected($event)" >
+          <ion-option *ngFor="let model of models" [value]="model.key">{{model.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngFor="let make of makes" (click)="makeSelected(make.text)">{{make.text}}</ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'lbl_search_model' | translate }}</ion-label>
+        <ion-input type="text" formControlName="model" [ngModel]="model" (ngModelChange)="searchModel($event)"></ion-input>
+      </ion-item>
+      <ion-item *ngFor="let model of models" (click)="modelSelected(model.text)">{{model.text}}</ion-item>
+    </ion-list>
+    <div class="next-button  0">
+      <button ion-button block class="redbutton" (click)="next()">{{ 'lbl_next' | translate }}</button>
+    </div>
+
+  </div> -->
+
+
+
+
+
+</ion-content>

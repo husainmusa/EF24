@@ -1,0 +1,13 @@
+                                                   
+  <ion-navbar>
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{pageTitle | translate}} </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-end (click)="alertLanguage()">
+        {{visibleLanguage}} 
+        <ion-icon name="arrow-dropdown"></ion-icon>
+      </button>
+    </ion-buttons>  
+  </ion-navbar>
